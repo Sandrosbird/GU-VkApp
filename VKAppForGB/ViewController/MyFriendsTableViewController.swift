@@ -34,6 +34,7 @@ class MyFriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NetworkService.shared.friendsRequest()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

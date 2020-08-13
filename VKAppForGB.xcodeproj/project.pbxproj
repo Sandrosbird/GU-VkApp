@@ -25,6 +25,10 @@
 		76A296CF24BA4A7C00A3182D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A296CD24BA4A7C00A3182D /* Main.storyboard */; };
 		76A296D124BA4A8300A3182D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76A296D024BA4A8300A3182D /* Assets.xcassets */; };
 		76A296D424BA4A8300A3182D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A296D224BA4A8300A3182D /* LaunchScreen.storyboard */; };
+		76B7349224E540F600F94585 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7349124E540F600F94585 /* NetworkService.swift */; };
+		76B7349524E547DF00F94585 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B7349424E547DF00F94585 /* WebKit.framework */; };
+		76E19EB924E40B730068764F /* FriendsServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E19EB824E40B730068764F /* FriendsServerResponse.swift */; };
+		76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E19EBC24E40D500068764F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,10 @@
 		76A296D024BA4A8300A3182D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76A296D324BA4A8300A3182D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76A296D524BA4A8300A3182D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76B7349124E540F600F94585 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		76B7349424E547DF00F94585 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		76E19EB824E40B730068764F /* FriendsServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsServerResponse.swift; sourceTree = "<group>"; };
+		76E19EBC24E40D500068764F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76B7349524E547DF00F94585 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +75,6 @@
 			children = (
 				762ACAE924D18695001345C3 /* UserModel.swift */,
 				762ACAEB24D186A5001345C3 /* GroupsModel.swift */,
-				769FF9D724E07D220082B449 /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -86,6 +94,7 @@
 				762ACAF424D19D9F001345C3 /* MyGroupsTableViewController.swift */,
 				762ACAFA24D19E8B001345C3 /* AllGroupsTableViewController.swift */,
 				769FF9CE24D379E70082B449 /* FriendsPhotoCollectionViewController.swift */,
+				76E19EBC24E40D500068764F /* LoginViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -115,6 +124,7 @@
 			children = (
 				76A296C624BA4A7C00A3182D /* VKAppForGB */,
 				76A296C524BA4A7C00A3182D /* Products */,
+				76B7349324E547DF00F94585 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +139,7 @@
 		76A296C624BA4A7C00A3182D /* VKAppForGB */ = {
 			isa = PBXGroup;
 			children = (
+				76E19EB724E40B340068764F /* Services */,
 				769FF9D224D6E4490082B449 /* View */,
 				762ACAF324D19D77001345C3 /* ViewCell */,
 				762ACAEE24D19B59001345C3 /* ViewController */,
@@ -141,6 +152,24 @@
 				76A296D524BA4A8300A3182D /* Info.plist */,
 			);
 			path = VKAppForGB;
+			sourceTree = "<group>";
+		};
+		76B7349324E547DF00F94585 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				76B7349424E547DF00F94585 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		76E19EB724E40B340068764F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				769FF9D724E07D220082B449 /* Session.swift */,
+				76E19EB824E40B730068764F /* FriendsServerResponse.swift */,
+				76B7349124E540F600F94585 /* NetworkService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,8 +246,11 @@
 				762ACAEA24D18695001345C3 /* UserModel.swift in Sources */,
 				762ACAF224D19B94001345C3 /* MyFriendsCell.swift in Sources */,
 				769FF9D424D6E4600082B449 /* CircleUIView.swift in Sources */,
+				76E19EB924E40B730068764F /* FriendsServerResponse.swift in Sources */,
+				76B7349224E540F600F94585 /* NetworkService.swift in Sources */,
 				762ACAF524D19D9F001345C3 /* MyGroupsTableViewController.swift in Sources */,
 				762ACAF724D19DD2001345C3 /* MyGroupsCell.swift in Sources */,
+				76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */,
 				769FF9D824E07D220082B449 /* Session.swift in Sources */,
 				769FF9D624D6E4730082B449 /* ShadowUIImageView.swift in Sources */,
 				762ACAEC24D186A5001345C3 /* GroupsModel.swift in Sources */,

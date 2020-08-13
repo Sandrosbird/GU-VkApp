@@ -28,6 +28,8 @@ class MyGroupsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NetworkService.shared.groupsRequest()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
