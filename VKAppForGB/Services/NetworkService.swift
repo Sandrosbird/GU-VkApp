@@ -22,9 +22,10 @@ class NetworkService {
     
     private init() {}
     
-    func friendsRequest() {
+    func friendsRequest() -> [User]{
         
         let session = NetworkService.shared.session
+        var usersArray = [User]()
                       
         var urlConstructor = URLComponents()
                 urlConstructor.scheme = "https"
@@ -34,15 +35,38 @@ class NetworkService {
                     URLQueryItem(name: "user_id", value: "\(Session.current.userId)"),
                     URLQueryItem(name: "access_token", value: Session.current.token),
                     URLQueryItem(name: "v", value: "5.92"),
-                    URLQueryItem(name: "fields", value: "id"),
-                    URLQueryItem(name: "fields", value: "first_name"),
+                    URLQueryItem(name: "count", value: "10"), //количество возвращаемых друзей
                     URLQueryItem(name: "fields", value: "photo_50")
         ]
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-            print(json)
+            
+//            print(Session.current.token, Session.current.userId)
+            
+            let receivedJson = json as! [String:Any]
+            let response = receivedJson["response"] as! [String:Any]
+            let count = response["count"] as! Int
+            let itemsArray = response["items"] as! [Any]
+            for item in itemsArray {
+                let item = item as! [String:Any]
+                
+                let user = User(json: item)
+//                let id = item["id"] as! Int
+//                let firstName = item["first_name"] as! String
+//                let lastName = item["last_name"] as! String
+//                let photo = item["photo_50"] as! String
+///                let isClosed = item["is_closed"] as! Bool
+///                let canAccessClosed = item["can_access_closed"] as! Bool
+///                let online = item["onlne"] as! Int
+//
+                usersArray.append(user)
+                print(user)
+            }
+            
+            
         }
         task.resume()
+        return usersArray
     }
     
     func groupsRequest() {

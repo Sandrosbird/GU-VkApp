@@ -12,7 +12,7 @@ import UIKit
 
 class FriendsPhotoCollectionViewController: UICollectionViewController {
 
-    let friendsArray = FriendsFactory.generateFriends()
+    let friendsArray = NetworkService.shared.friendsRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +50,9 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendsPhotoCell", for: indexPath) as! FriendsPhotoCollectionViewCell
-        let photo = friendsArray[indexPath.row].userPhotos[indexPath.row]
-        
-        cell.friendsPhoto.image = photo
+//        let photo = friendsArray[indexPath.row].userPhotos[indexPath.row]
+//        
+//        cell.friendsPhoto.image = photo
     
         return cell
     }

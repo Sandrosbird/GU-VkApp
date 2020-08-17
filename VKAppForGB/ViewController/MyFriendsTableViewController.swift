@@ -10,10 +10,10 @@ import UIKit
 
 class MyFriendsTableViewController: UITableViewController {
     
-    var friendsArray = FriendsFactory.generateFriends()
+    var friendsArray: [User] = NetworkService.shared.friendsRequest()
     var sortedFriends: [User] {
         get {
-            return FriendsFactory.inAlphabetOrder(usersArray: friendsArray)
+            return MyFriendsTableViewController.inAlphabetOrder(usersArray: friendsArray)
         }
         set { }
     }
@@ -21,8 +21,8 @@ class MyFriendsTableViewController: UITableViewController {
         get {
             var firstWordsArray = [String]()
             for friend in sortedFriends {
-                if !firstWordsArray.contains(String(friend.name.first!)) {
-                    firstWordsArray.append(String(friend.name.first!))
+                if !firstWordsArray.contains(String(friend.firstName.first!)) {
+                    firstWordsArray.append(String(friend.firstName.first!))
                 }
             }
             
@@ -34,7 +34,7 @@ class MyFriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkService.shared.friendsRequest()
+//        NetworkService.shared.friendsRequest()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,15 +65,21 @@ class MyFriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
         let currentSectionName = sectionNames[indexPath.section]
-        let firstLetterOfName = String(sortedFriends[indexPath.row].name.first!)
+        let firstLetterOfName = String(sortedFriends[indexPath.row].firstName.first!)
         if  firstLetterOfName == currentSectionName {
             let friend = sortedFriends[indexPath.row]
-            cell.friendIcon.image = friend.avatar
-            cell.friendName.text = friend.name
+//            cell.friendIcon.image = friend.photo
+            cell.friendName.text = friend.firstName+" "+friend.lastName
         }
         
         return cell
     }
     
-    //добавить header и секции для таблицы
+}
+
+extension MyFriendsTableViewController {
+    static func inAlphabetOrder(usersArray: [User]) -> [User] {
+        let sortedFriends = usersArray.sorted(by: { $0.name.lowercased() < $1.name.lowercased() })
+        return sortedFriends
+    }
 }
