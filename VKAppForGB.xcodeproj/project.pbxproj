@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		762ACAEA24D18695001345C3 /* UserModel(old).swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAE924D18695001345C3 /* UserModel(old).swift */; };
-		762ACAEC24D186A5001345C3 /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAEB24D186A5001345C3 /* GroupsModel.swift */; };
+		762ACAEC24D186A5001345C3 /* GroupsModel(old).swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAEB24D186A5001345C3 /* GroupsModel(old).swift */; };
 		762ACAF024D19B85001345C3 /* MyFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAEF24D19B85001345C3 /* MyFriendsTableViewController.swift */; };
 		762ACAF224D19B94001345C3 /* MyFriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAF124D19B94001345C3 /* MyFriendsCell.swift */; };
 		762ACAF524D19D9F001345C3 /* MyGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAF424D19D9F001345C3 /* MyGroupsTableViewController.swift */; };
@@ -28,13 +28,14 @@
 		76B7349224E540F600F94585 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7349124E540F600F94585 /* NetworkService.swift */; };
 		76B7349524E547DF00F94585 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B7349424E547DF00F94585 /* WebKit.framework */; };
 		76B7349724E9D90F00F94585 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7349624E9D90F00F94585 /* UserModel.swift */; };
-		76E19EB924E40B730068764F /* FriendsServerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E19EB824E40B730068764F /* FriendsServerResponse.swift */; };
+		76BDF15624EE7A4300FC6D53 /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */; };
+		76BDF15824EE906D00FC6D53 /* UserPhotoesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BDF15724EE906D00FC6D53 /* UserPhotoesModel.swift */; };
 		76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E19EBC24E40D500068764F /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		762ACAE924D18695001345C3 /* UserModel(old).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserModel(old).swift"; sourceTree = "<group>"; };
-		762ACAEB24D186A5001345C3 /* GroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
+		762ACAEB24D186A5001345C3 /* GroupsModel(old).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GroupsModel(old).swift"; sourceTree = "<group>"; };
 		762ACAEF24D19B85001345C3 /* MyFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsTableViewController.swift; sourceTree = "<group>"; };
 		762ACAF124D19B94001345C3 /* MyFriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsCell.swift; sourceTree = "<group>"; };
 		762ACAF424D19D9F001345C3 /* MyGroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +57,8 @@
 		76B7349124E540F600F94585 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		76B7349424E547DF00F94585 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		76B7349624E9D90F00F94585 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		76E19EB824E40B730068764F /* FriendsServerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsServerResponse.swift; sourceTree = "<group>"; };
+		76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
+		76BDF15724EE906D00FC6D53 /* UserPhotoesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoesModel.swift; sourceTree = "<group>"; };
 		76E19EBC24E40D500068764F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,8 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				762ACAE924D18695001345C3 /* UserModel(old).swift */,
-				762ACAEB24D186A5001345C3 /* GroupsModel.swift */,
+				762ACAEB24D186A5001345C3 /* GroupsModel(old).swift */,
 				76B7349624E9D90F00F94585 /* UserModel.swift */,
+				76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */,
+				76BDF15724EE906D00FC6D53 /* UserPhotoesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				769FF9D724E07D220082B449 /* Session.swift */,
-				76E19EB824E40B730068764F /* FriendsServerResponse.swift */,
 				76B7349124E540F600F94585 /* NetworkService.swift */,
 			);
 			path = Services;
@@ -249,22 +252,23 @@
 				762ACAEA24D18695001345C3 /* UserModel(old).swift in Sources */,
 				762ACAF224D19B94001345C3 /* MyFriendsCell.swift in Sources */,
 				769FF9D424D6E4600082B449 /* CircleUIView.swift in Sources */,
-				76E19EB924E40B730068764F /* FriendsServerResponse.swift in Sources */,
 				76B7349224E540F600F94585 /* NetworkService.swift in Sources */,
 				762ACAF524D19D9F001345C3 /* MyGroupsTableViewController.swift in Sources */,
 				762ACAF724D19DD2001345C3 /* MyGroupsCell.swift in Sources */,
 				76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */,
 				769FF9D824E07D220082B449 /* Session.swift in Sources */,
 				769FF9D624D6E4730082B449 /* ShadowUIImageView.swift in Sources */,
-				762ACAEC24D186A5001345C3 /* GroupsModel.swift in Sources */,
+				762ACAEC24D186A5001345C3 /* GroupsModel(old).swift in Sources */,
 				762ACAF024D19B85001345C3 /* MyFriendsTableViewController.swift in Sources */,
 				76A296CC24BA4A7C00A3182D /* ViewController.swift in Sources */,
 				769FF9CF24D379E70082B449 /* FriendsPhotoCollectionViewController.swift in Sources */,
 				762ACAFB24D19E8B001345C3 /* AllGroupsTableViewController.swift in Sources */,
 				76B7349724E9D90F00F94585 /* UserModel.swift in Sources */,
+				76BDF15824EE906D00FC6D53 /* UserPhotoesModel.swift in Sources */,
 				76A296C824BA4A7C00A3182D /* AppDelegate.swift in Sources */,
 				762ACAF924D19DF0001345C3 /* AllGroupsCell.swift in Sources */,
 				769FF9D124D37A1D0082B449 /* FriendsPhotoCollectionViewCell.swift in Sources */,
+				76BDF15624EE7A4300FC6D53 /* GroupsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

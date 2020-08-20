@@ -460,10 +460,10 @@
             </objects>
             <point key="canvasLocation" x="2312" y="-291"/>
         </scene>
-        <!--Main Tab Bar Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="B5t-p4-7vr">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="Pcr-TA-2uI" customClass="MainTabBarController" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="Pcr-TA-2uI" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Q0W-Wx-6o3"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iVG-Cs-ONs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

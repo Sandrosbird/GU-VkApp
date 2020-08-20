@@ -19,13 +19,17 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        print("viewDidLoad")
+//
+        removeCookies()
+        
         var urlComponents = URLComponents()
         
         urlComponents.scheme = "https"
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
         urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "7565962"),
+            URLQueryItem(name: "client_id", value: "7570767"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "response_type", value: "token"),
@@ -75,8 +79,15 @@ extension LoginViewController: WKNavigationDelegate {
         
 //        print("token = \(Session.current.token)")
 //        print("userId = \(Session.current.userId)")
-        
+
         decisionHandler(.cancel)
         performSegue(withIdentifier: "webViewLogin", sender: nil)
+    }
+    
+    func removeCookies(){
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
     }
 }

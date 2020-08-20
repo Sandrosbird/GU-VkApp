@@ -24,12 +24,24 @@ class MyGroupsTableViewController: UITableViewController {
         }
     }
     
-    var groupsArray = [Group]()
+    var groupsArray = [Group]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NetworkService.shared.groupsRequest() { [weak self] groups in
+            self?.groupsArray = groups
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NetworkService.shared.groupsRequest()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,7 +55,7 @@ class MyGroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsTableViewCell
         let group = groupsArray[indexPath.row]
-        cell.groupImage.image = group.groupAvatar
+        cell.groupImage.image = group.imagePhoto
         cell.groupName.text = group.name
         
         return cell

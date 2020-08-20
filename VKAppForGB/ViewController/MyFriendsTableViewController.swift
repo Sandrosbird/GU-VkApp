@@ -9,45 +9,59 @@
 import UIKit
 
 class MyFriendsTableViewController: UITableViewController {
-    
-    var friendsArray: [User] = NetworkService.shared.friendsRequest()
-    var sortedFriends: [User] {
-        get {
-            return MyFriendsTableViewController.inAlphabetOrder(usersArray: friendsArray)
-        }
-        set { }
-    }
-    var sectionNames: [String] {
-        get {
-            var firstWordsArray = [String]()
-            for friend in sortedFriends {
-                if !firstWordsArray.contains(String(friend.firstName.first!)) {
-                    firstWordsArray.append(String(friend.firstName.first!))
-                }
+
+//    lazy var friendsArray = [User]()
+    var friendsArray = [User]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
-            
-            let sortedFirstWordsArray = firstWordsArray.sorted(by: { $0.lowercased() < $1.lowercased() })
-            return sortedFirstWordsArray
         }
-        set { }
+    }
+//    lazy var sortedFriends: [User] = {
+//        MyFriendsTableViewController.inAlphabetOrder(usersArray: friendsArray)
+//    }()
+//    var sectionNames: [String] {
+//        get {
+//            var firstWordsArray = [String]()
+//            for friend in sortedFriends {
+//                if !firstWordsArray.contains(String(friend.firstName.first!)) {
+//                    firstWordsArray.append(String(friend.firstName.first!))
+//                }
+//            }
+//
+//            let sortedFirstWordsArray = firstWordsArray.sorted(by: { $0.lowercased() < $1.lowercased() })
+//            return sortedFirstWordsArray
+//        }
+//        set { }
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NetworkService.shared.friendsRequest() { [weak self] friends in
+            self?.friendsArray = friends
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        NetworkService.shared.friendsRequest()
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionNames.count
+        return 1
+//        return sectionNames.count
     }
-    
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return sectionNames
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionNames.remove(at: section)
-    }
+//
+//    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        return sectionNames
+//    }
+//
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return sectionNames.remove(at: section)
+//    }
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,19 +73,30 @@ class MyFriendsTableViewController: UITableViewController {
 //        }
 //
 //        return numberOfRowsInSection
-        return sortedFriends.count
+//        friendsArray = NetworkService.shared.friendsRequest()
+        
+        return friendsArray.count
+//            sortedFriends.count
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
-        let currentSectionName = sectionNames[indexPath.section]
-        let firstLetterOfName = String(sortedFriends[indexPath.row].firstName.first!)
-        if  firstLetterOfName == currentSectionName {
-            let friend = sortedFriends[indexPath.row]
-//            cell.friendIcon.image = friend.photo
-            cell.friendName.text = friend.firstName+" "+friend.lastName
-        }
+//        let currentSectionName = sectionNames[indexPath.section]
+//        let firstLetterOfName = String(sortedFriends[indexPath.row].firstName.first!)
+//        if  firstLetterOfName == currentSectionName {
+//            let friend = sortedFriends[indexPath.row]
+////            cell.friendIcon.image = friend.photo
+//            cell.friendName.text = friend.firstName+" "+friend.lastName
+//        }
+              
+        let friend = friendsArray[indexPath.row]
+        let urlForAvatar = friend.photo
         
+        
+        
+        cell.friendName.text = friend.firstName+" "+friend.lastName
+        cell.friendIcon.image = friend.imagePhoto
         return cell
     }
     
@@ -79,7 +104,7 @@ class MyFriendsTableViewController: UITableViewController {
 
 extension MyFriendsTableViewController {
     static func inAlphabetOrder(usersArray: [User]) -> [User] {
-        let sortedFriends = usersArray.sorted(by: { $0.name.lowercased() < $1.name.lowercased() })
+        let sortedFriends = usersArray.sorted(by: { $0.firstName.lowercased() < $1.firstName.lowercased() })
         return sortedFriends
     }
 }

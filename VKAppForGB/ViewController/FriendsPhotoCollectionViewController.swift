@@ -12,12 +12,12 @@ import UIKit
 
 class FriendsPhotoCollectionViewController: UICollectionViewController {
 
-    let friendsArray = NetworkService.shared.friendsRequest()
+//    let friendsArray = NetworkService.shared.friendsRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkService.shared.personsPhotoRequest()
+//        NetworkService.shared.personsPhotoRequest()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
