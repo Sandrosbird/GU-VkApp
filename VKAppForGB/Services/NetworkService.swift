@@ -42,7 +42,7 @@ class NetworkService {
             URLQueryItem(name: "user_id", value: "\(Session.current.userId)"),
             URLQueryItem(name: "access_token", value: Session.current.token),
             URLQueryItem(name: "v", value: "5.122"),
-            URLQueryItem(name: "count", value: "10"), //количество возвращаемых друзей
+            URLQueryItem(name: "count", value: "200"), //количество возвращаемых друзей
             URLQueryItem(name: "fields", value: "photo_50")
         ]
         
@@ -53,7 +53,7 @@ class NetworkService {
                 
                 usersArray = jsonResponse.response.items
                 
-                print(usersArray)
+//                print(usersArray)
             } catch {
                 print(error)
             }
@@ -80,7 +80,7 @@ class NetworkService {
             URLQueryItem(name: "access_token", value: Session.current.token),
             URLQueryItem(name: "v", value: "5.92"),
             URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "count", value: "10")
+            URLQueryItem(name: "count", value: "150")
         ]
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             
@@ -89,7 +89,7 @@ class NetworkService {
                 
                 groupsArray = jsonResponse.response.items
                 
-                print(groupsArray)
+//                print(groupsArray)
             } catch {
                 print(error)
             }

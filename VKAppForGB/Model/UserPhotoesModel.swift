@@ -8,6 +8,7 @@
 
 import UIKit
 
-struct <#name#> {
-    <#fields#>
-}
+
+//struct <#name#> {
+//    <#fields#>
+//}

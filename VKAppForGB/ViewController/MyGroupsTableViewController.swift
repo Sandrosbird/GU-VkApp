@@ -7,41 +7,39 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsTableViewController: UITableViewController {
     
-    @IBAction func addGroup(seque: UIStoryboardSegue) {
-        guard seque.identifier == "addGroup" else { return }
-        let allGroupsController = seque.source as! AllGroupsTableViewController
-        
-        if let indexPath = allGroupsController.tableView.indexPathForSelectedRow {
-            let group = allGroupsController.groupsArray[indexPath.row]
-            
-            if !groupsArray.contains(group){
-                groupsArray.append(group)
-                tableView.reloadData()
-            }
-        }
+    
+    private let realmService = RealmService.shared
+    
+    var groupsArray: Results<Group>? {
+        let groups: Results<Group>? = realmService?.getFromRealm()
+        return groups
     }
     
-    var groupsArray = [Group]() {
-        didSet {
+    private func loadGroups() {
+        guard groupsArray != nil else { return }
+        NetworkService.shared.groupsRequest() { [weak self] groups in
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                try? self?.realmService?.addManyObjects(objects: groups)
+                self?.tableView.reloadData()
+                
             }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NetworkService.shared.groupsRequest() { [weak self] groups in
-            self?.groupsArray = groups
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let groupsArray = groupsArray, groupsArray.isEmpty {
+            loadGroups()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,23 +47,28 @@ class MyGroupsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupsArray.count
+        return groupsArray?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsTableViewCell
-        let group = groupsArray[indexPath.row]
-        cell.groupImage.image = group.imagePhoto
-        cell.groupName.text = group.name
+        
+        let group = groupsArray?[indexPath.row]
+        let groupAvatarURL = group?.photo
+        
+        guard let url = URL(string: groupAvatarURL ?? ""), let data = try? Data(contentsOf: url) else { return cell }
+        
+        cell.groupImage.image = UIImage(data: data)
+        cell.groupName.text = group?.name
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            groupsArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .
+//            groupsArray.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
 }

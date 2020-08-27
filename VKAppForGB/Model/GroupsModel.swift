@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct MainGroupsResponse: Decodable {
     let response: GroupsResponse
@@ -17,34 +18,32 @@ struct GroupsResponse: Decodable {
     var items: [Group]
 }
 
-class Group: Codable, Equatable {
+class Group: Object, Codable {
     static func == (lhs: Group, rhs: Group) -> Bool {
         return true
     }
     
-    var id: Int = 0
-    dynamic var name: String = ""
-    dynamic var photo: String = ""
-    dynamic var imagePhoto: UIImage {
-        var image = UIImage()
-        
-        let imageURl = URL(string: photo)!
-        
-        DispatchQueue.global().async {
-            guard let imageData = try? Data(contentsOf: imageURl) else { return }
-            let receivedImage = UIImage(data: imageData)
-            guard receivedImage != nil else { return }
-            image = receivedImage!
-        }
-        
-        print("Аватар получен")
-        
-        return image
-    }
+    @objc dynamic var id = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var photo: String = ""
+    
     
     enum CodingKeys: String, CodingKey {
         case id, name
         case photo = "photo_50"
     }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    convenience required init(from decoder: Decoder) throws {
+        self.init()
+        
+        let response = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try response.decode(Int.self, forKey: .id)
+        self.name = try response.decode(String.self, forKey: .name)
+        self.photo = try response.decode(String.self, forKey: .photo)
+     }
     
 }

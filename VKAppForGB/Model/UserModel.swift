@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct MainResponse: Decodable {
     let response: FriendsResponse
@@ -17,27 +18,12 @@ struct FriendsResponse: Decodable {
     var items: [User]
 }
 
-class User: Decodable {
-    dynamic var id: Int = 0
-    dynamic var firstName: String = ""
-    dynamic var lastName: String = ""
-    dynamic var photo: String = ""
-    dynamic var imagePhoto: UIImage {
-        var image = UIImage()
-        
-        let imageURl = URL(string: photo)!
-        
-        DispatchQueue.global().async {
-            guard let imageData = try? Data(contentsOf: imageURl) else { return }
-            let receivedImage = UIImage(data: imageData)
-            guard receivedImage != nil else { return }
-            image = receivedImage!
-        }
-        
-        print("Аватар получен")
-        
-        return image
-    }
+class User: Object, Decodable {
+    @objc dynamic var id = 0
+    @objc dynamic var firstName = ""
+    @objc dynamic var lastName = ""
+    @objc dynamic var photo = ""
+    
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -45,6 +31,12 @@ class User: Decodable {
         case lastName = "last_name"
         case photo = "photo_50"
     }
+    
+    //уникальный ключ для модели в базе Realm
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+    
     
     convenience required init (from decoder: Decoder) throws {
         self.init()
@@ -57,29 +49,12 @@ class User: Decodable {
        
     }
     
+    func fillUserRealm() {
+        
+    }
+    
+    
+//    static func inAlphabetOrder(users: [User]) -> (Dictionary<String, [User]>) {
+//       
+//    }
 }
-
-
-
-//struct User {
-//    let id: Int
-//    var firstName = ""
-//    var lastName = ""
-//    var photo = ""
-//
-//    init(id: Int) {
-//        self.id = id
-//    }
-//
-//    init(json: [String:Any]) {
-//        let id = json["id"] as! Int
-//        self.init(id: id)
-//
-//        self.firstName = json["first_name"] as! String
-//        self.lastName = json["last_name"] as! String
-//        self.photo = json["photo_50"] as! String
-//    }
-//
-//
-//
-//}

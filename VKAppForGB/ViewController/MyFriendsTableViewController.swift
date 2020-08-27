@@ -7,47 +7,66 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyFriendsTableViewController: UITableViewController {
 
-//    lazy var friendsArray = [User]()
-    var friendsArray = [User]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
+    @IBOutlet var searchTextField: UISearchBar?
+    var searchText: String { searchTextField?.text ?? "" }
+    
+//    private var searchedFriends: Results<User>? {
+//        guard !searchText.isEmpty else { return friendsArray! }
+//
+////        return friendsArray?.filter(NSPredicate(format: "firstName CONTAINS[cd] %@", searchText))
+//        return friendsArray?.filter({ (friend) -> Bool in
+//            friend.firstName.contains(searchText)
+//        })
+//    }
+    
+    private let realmService = RealmService.shared
+    
+    var friendsArray: Results<User>? {
+        let friends: Results<User>? = realmService?.getFromRealm()
+        return friends
     }
-//    lazy var sortedFriends: [User] = {
-//        MyFriendsTableViewController.inAlphabetOrder(usersArray: friendsArray)
-//    }()
+    
+    
+    //make set from friends array
+//    lazy var sortedFriends = User.inAlphabetOrder(users: friendsArray)
+    
+        
+//
 //    var sectionNames: [String] {
 //        get {
-//            var firstWordsArray = [String]()
-//            for friend in sortedFriends {
-//                if !firstWordsArray.contains(String(friend.firstName.first!)) {
-//                    firstWordsArray.append(String(friend.firstName.first!))
-//                }
-//            }
-//
-//            let sortedFirstWordsArray = firstWordsArray.sorted(by: { $0.lowercased() < $1.lowercased() })
-//            return sortedFirstWordsArray
+//            sortedFriends.keys
 //        }
 //        set { }
 //    }
     
+    private func loadFriends(completion: (() -> Void)? = nil) {
+        guard friendsArray != nil else { return }
+            NetworkService.shared.friendsRequest() { [weak self] friends in
+                DispatchQueue.main.async {
+                    try? self?.realmService?.addManyObjects(objects: friends)
+                    self?.tableView.reloadData()
+                    print("данные из сети")
+                    completion? ()
+                }
+            }
+       
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        NetworkService.shared.friendsRequest() { [weak self] friends in
-            self?.friendsArray = friends
-        }
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let friendsArray = friendsArray, friendsArray.isEmpty {
+            loadFriends()
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -75,7 +94,7 @@ class MyFriendsTableViewController: UITableViewController {
 //        return numberOfRowsInSection
 //        friendsArray = NetworkService.shared.friendsRequest()
         
-        return friendsArray.count
+        return friendsArray?.count ?? 0
 //            sortedFriends.count
         
     }
@@ -90,15 +109,18 @@ class MyFriendsTableViewController: UITableViewController {
 //            cell.friendName.text = friend.firstName+" "+friend.lastName
 //        }
               
-        let friend = friendsArray[indexPath.row]
-        let urlForAvatar = friend.photo
+        let friend = friendsArray?[indexPath.row]
+        let urlForAvatar = friend?.photo
         
+        guard let url = URL(string: urlForAvatar ?? ""), let data = try? Data(contentsOf: url) else { return cell }
         
+        cell.friendName.text = "\(friend?.firstName ?? "NO")  \(friend?.lastName ?? "Name")"
+        cell.friendIcon.image = UIImage(data: data)
+
         
-        cell.friendName.text = friend.firstName+" "+friend.lastName
-        cell.friendIcon.image = friend.imagePhoto
         return cell
     }
+    
     
 }
 
