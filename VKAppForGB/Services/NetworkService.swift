@@ -98,37 +98,37 @@ class NetworkService {
         
         task.resume()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-//
-//    func personsPhotoRequest() {
-//        let session = NetworkService.shared.session
-//
-//        var urlConstructor = URLComponents()
-//        urlConstructor.scheme = schemeHttps
-//        urlConstructor.host = hostVk
-//        urlConstructor.path = "/method/photos.get"
-//        urlConstructor.queryItems = [
-//            URLQueryItem(name: "user_id", value: "\(Session.current.userId)"),
-//            URLQueryItem(name: "access_token", value: Session.current.token),
-//            URLQueryItem(name: "v", value: "5.92"),
-//            URLQueryItem(name: "album_id", value: "profile"),
-//            URLQueryItem(name: "owner_id", value: "\(Session.current.userId)"),
-//            URLQueryItem(name: "count", value: "10")
-//        ]
-//        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-//            let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-//            print(json)
-//
-//        }
-//        task.resume()
-//    }
+
+    func personsPhotoRequest(ownerId: Int, completion: @escaping ([UserPhotos]) -> Void) {
+        let session = NetworkService.shared.session
+        
+        var photos = [UserPhotos]()
+//        var photoUrl = [PhotoSizes]()
+
+        var urlConstructor = URLComponents()
+        urlConstructor.scheme = schemeHttps
+        urlConstructor.host = hostVk
+        urlConstructor.path = "/method/photos.getAll"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "access_token", value: Session.current.token),
+            URLQueryItem(name: "v", value: "5.92"),
+            URLQueryItem(name: "owner_id", value: "\(ownerId)")
+        ]
+        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
+            
+            do {
+                let jsonResponse = try JSONDecoder().decode(MainUserPhotosResponse.self, from: data!)
+                
+                photos = jsonResponse.response.items
+            } catch {
+                print(error.localizedDescription)
+            }
+            completion(photos)
+            
+
+        }
+        task.resume()
+    }
     
     
     

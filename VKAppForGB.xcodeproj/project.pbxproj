@@ -29,7 +29,7 @@
 		76B7349524E547DF00F94585 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B7349424E547DF00F94585 /* WebKit.framework */; };
 		76B7349724E9D90F00F94585 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7349624E9D90F00F94585 /* UserModel.swift */; };
 		76BDF15624EE7A4300FC6D53 /* GroupsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */; };
-		76BDF15824EE906D00FC6D53 /* UserPhotoesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BDF15724EE906D00FC6D53 /* UserPhotoesModel.swift */; };
+		76BDF15824EE906D00FC6D53 /* UserPhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BDF15724EE906D00FC6D53 /* UserPhotosModel.swift */; };
 		76D86A8124F7AB4B00FF2AC9 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D86A8024F7AB4B00FF2AC9 /* RealmService.swift */; };
 		76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E19EBC24E40D500068764F /* LoginViewController.swift */; };
 		A63E1327EFC25B9FEBB47E9D /* Pods_VKAppForGB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A7FC130DF8F73165D842D7C /* Pods_VKAppForGB.framework */; };
@@ -62,7 +62,7 @@
 		76B7349424E547DF00F94585 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		76B7349624E9D90F00F94585 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsModel.swift; sourceTree = "<group>"; };
-		76BDF15724EE906D00FC6D53 /* UserPhotoesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoesModel.swift; sourceTree = "<group>"; };
+		76BDF15724EE906D00FC6D53 /* UserPhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosModel.swift; sourceTree = "<group>"; };
 		76D86A8024F7AB4B00FF2AC9 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		76E19EBC24E40D500068764F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9A7FC130DF8F73165D842D7C /* Pods_VKAppForGB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKAppForGB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +88,7 @@
 				762ACAEB24D186A5001345C3 /* GroupsModel(old).swift */,
 				76B7349624E9D90F00F94585 /* UserModel.swift */,
 				76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */,
-				76BDF15724EE906D00FC6D53 /* UserPhotoesModel.swift */,
+				76BDF15724EE906D00FC6D53 /* UserPhotosModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -98,9 +98,9 @@
 			children = (
 				76A296CB24BA4A7C00A3182D /* ViewController.swift */,
 				762ACAEF24D19B85001345C3 /* MyFriendsTableViewController.swift */,
+				769FF9CE24D379E70082B449 /* FriendsPhotoCollectionViewController.swift */,
 				762ACAF424D19D9F001345C3 /* MyGroupsTableViewController.swift */,
 				762ACAFA24D19E8B001345C3 /* AllGroupsTableViewController.swift */,
-				769FF9CE24D379E70082B449 /* FriendsPhotoCollectionViewController.swift */,
 				76E19EBC24E40D500068764F /* LoginViewController.swift */,
 			);
 			path = ViewController;
@@ -319,7 +319,7 @@
 				769FF9CF24D379E70082B449 /* FriendsPhotoCollectionViewController.swift in Sources */,
 				762ACAFB24D19E8B001345C3 /* AllGroupsTableViewController.swift in Sources */,
 				76B7349724E9D90F00F94585 /* UserModel.swift in Sources */,
-				76BDF15824EE906D00FC6D53 /* UserPhotoesModel.swift in Sources */,
+				76BDF15824EE906D00FC6D53 /* UserPhotosModel.swift in Sources */,
 				76D86A8124F7AB4B00FF2AC9 /* RealmService.swift in Sources */,
 				76A296C824BA4A7C00A3182D /* AppDelegate.swift in Sources */,
 				762ACAF924D19DF0001345C3 /* AllGroupsCell.swift in Sources */,

@@ -19,8 +19,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print("viewDidLoad")
-//
         removeCookies()
         
         var urlComponents = URLComponents()
@@ -77,8 +75,8 @@ extension LoginViewController: WKNavigationDelegate {
         Session.current.token = token
         Session.current.userId = userId
         
-//        print("token = \(Session.current.token)")
-//        print("userId = \(Session.current.userId)")
+        print("token = \(Session.current.token)")
+        print("userId = \(Session.current.userId)")
 
         decisionHandler(.cancel)
         performSegue(withIdentifier: "webViewLogin", sender: nil)

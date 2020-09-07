@@ -12,28 +12,37 @@ import UIKit
 
 class FriendsPhotoCollectionViewController: UICollectionViewController {
 
-//    let friendsArray = NetworkService.shared.friendsRequest()
+//    let friendsArray = NetworkService.shared.friendsRequest {
+//        completion()
+//    }
+    
+    
+    var ownerId: Int = 0
+    
+    var userPhotosArray: [UserPhotos] {
+        loadPhoto()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NetworkService.shared.personsPhotoRequest()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Do any additional setup after loading the view.
     }
 
-    /*
-    // MARK: - Navigation
+    // MARK: Function to get photo
+    
+    private func loadPhoto() -> [UserPhotos] {
+        var userPhotos = [UserPhotos]()
+        NetworkService.shared.personsPhotoRequest(ownerId: ownerId) { [weak self] photos in
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+            DispatchQueue.main.async {
+                userPhotos = photos
+
+                self?.collectionView.reloadData()
+                
+            }
+        }
+        return userPhotos
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -45,47 +54,28 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 3
+        return userPhotosArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendsPhotoCell", for: indexPath) as! FriendsPhotoCollectionViewCell
-//        let photo = friendsArray[indexPath.row].userPhotos[indexPath.row]
-//        
-//        cell.friendsPhoto.image = photo
+        
+        let photoSizesDict = userPhotosArray[indexPath.row].sizes
+        var urlForPhoto: String = ""
+        
+        for (_, value) in photoSizesDict {
+            if value == "m" {
+                urlForPhoto = photoSizesDict["photoType"] ?? ""
+            }
+        }
+        
+        guard let url = URL(string: urlForPhoto), let data = try? Data(contentsOf: url) else { return cell }
+        
+        cell.friendsPhoto.image = UIImage(data: data)
     
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
 
 }

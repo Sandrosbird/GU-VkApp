@@ -18,6 +18,7 @@ class MyFriendsTableViewController: UITableViewController {
     
     private let realmService = RealmService.shared
     private var realmToken: NotificationToken?
+    private var userIdForSegue: Int = 0
     
     
     var friendsArray: Results<User>? {
@@ -36,7 +37,6 @@ class MyFriendsTableViewController: UITableViewController {
         NetworkService.shared.friendsRequest() { [weak self] friends in
             DispatchQueue.main.async {
                 try? self?.realmService?.addManyObjects(objects: friends)
-                self?.tableView.reloadData()
                 //                    print("данные из сети")
                 completion? ()
             }
@@ -67,6 +67,12 @@ class MyFriendsTableViewController: UITableViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "showUserPhotos" else { return }
+        
+        MyFriendsTableViewController.goToPhotos(id: userIdForSegue)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -81,55 +87,33 @@ class MyFriendsTableViewController: UITableViewController {
             loadFriends()
             createRealmNotification()
         }
+        
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-        //        return sectionNames.count
     }
-    //
-    //    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-    //        return sectionNames
-    //    }
-    //
-    //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //        return sectionNames.remove(at: section)
-    //    }
-    
+   
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        let indexPath = IndexPath.init()
-        //        var numberOfRowsInSection = Int()
-        //
-        //        if  sectionNames[indexPath.row].contains(friendsArray[indexPath.row].name.first!) {
-        //            numberOfRowsInSection += 1
-        //        }
-        //
-        //        return numberOfRowsInSection
-        //        friendsArray = NetworkService.shared.friendsRequest()
-        
+
         return searchedFriends?.count ?? 0
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
-        //        let currentSectionName = sectionNames[indexPath.section]
-        //        let firstLetterOfName = String(sortedFriends[indexPath.row].firstName.first!)
-        //        if  firstLetterOfName == currentSectionName {
-        //            let friend = sortedFriends[indexPath.row]
-        ////            cell.friendIcon.image = friend.photo
-        //            cell.friendName.text = friend.firstName+" "+friend.lastName
-        //        }
+       
         
-        let friend = searchedFriends?[indexPath.row]
-        let urlForAvatar = friend?.photo
+        guard let friend = searchedFriends?[indexPath.row] else { return cell }
+        let urlForAvatar = friend.photo
+        userIdForSegue = friend.id
         
-        guard let url = URL(string: urlForAvatar ?? ""), let data = try? Data(contentsOf: url) else { return cell }
+        guard let url = URL(string: urlForAvatar ), let data = try? Data(contentsOf: url) else { return cell }
         
-        cell.friendName.text = "\(friend?.firstName ?? "NO")  \(friend?.lastName ?? "Name")"
+        cell.friendName.text = "\(friend.firstName ) \(friend.lastName)"
         cell.friendIcon.image = UIImage(data: data)
-        
         
         return cell
     }
@@ -140,6 +124,17 @@ class MyFriendsTableViewController: UITableViewController {
         refreshControl?.endRefreshing()
     }
     
+    static func goToPhotos(id: Int) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard let friendPhotoViewController = storyboard.instantiateViewController(identifier: "FriendsPhotoCollectionViewController") as? FriendsPhotoCollectionViewController else { return }
+        
+        friendPhotoViewController.ownerId = id
+        
+    }
+    
+    
+    
     
 }
 
@@ -148,3 +143,4 @@ extension MyFriendsTableViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
+

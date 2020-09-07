@@ -108,15 +108,7 @@ class MyGroupsTableViewController: UITableViewController {
         loadGroups()
         print("refresh")
         refreshControl?.endRefreshing()
-    }
-    
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .
-//            groupsArray.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-    
+    }    
 }
 
 extension MyGroupsTableViewController: UISearchBarDelegate {

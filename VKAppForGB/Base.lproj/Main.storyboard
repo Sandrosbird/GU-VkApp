@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g82-OI-xIy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="g82-OI-xIy">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -208,7 +208,7 @@
                                 <connections>
                                     <outlet property="friendIcon" destination="zMT-pD-B8c" id="z1X-FQ-COH"/>
                                     <outlet property="friendName" destination="JKc-du-fm1" id="1Rs-DR-V5I"/>
-                                    <segue destination="f3l-Zx-TVc" kind="show" id="vQH-c1-9xZ"/>
+                                    <segue destination="f3l-Zx-TVc" kind="show" identifier="showUserPhotos" id="vQH-c1-9xZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -219,6 +219,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Friends" id="bGA-t1-emh"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="RefreshFriends" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="WNX-cx-trx">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
@@ -232,7 +233,7 @@
         <!--Friends Photo Collection View Controller-->
         <scene sceneID="cjj-V4-Rka">
             <objects>
-                <collectionViewController modalPresentationStyle="fullScreen" id="f3l-Zx-TVc" customClass="FriendsPhotoCollectionViewController" customModule="VKAppForGB" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="FriendsPhotoCollectionViewController" modalPresentationStyle="fullScreen" id="f3l-Zx-TVc" customClass="FriendsPhotoCollectionViewController" customModule="VKAppForGB" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="prototypes" id="8cq-IO-md5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,7 +274,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUV-t8-Akt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3993" y="-291"/>
+            <point key="canvasLocation" x="3161" y="-1034"/>
         </scene>
         <!--Groups-->
         <scene sceneID="I4n-j7-0Bb">
@@ -366,6 +367,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="FvW-8g-3Zv">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
@@ -452,7 +454,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7JT-RC-ljV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="wsg-yy-SB0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3994" y="433"/>
+            <point key="canvasLocation" x="3161" y="1197"/>
         </scene>
         <!--Groups-->
         <scene sceneID="NOj-YE-a7c">

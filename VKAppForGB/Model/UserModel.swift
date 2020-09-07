@@ -48,13 +48,4 @@ class User: Object, Decodable {
         self.photo = try response.decode(String.self, forKey: .photo)
        
     }
-    
-    func fillUserRealm() {
-        
-    }
-    
-    
-//    static func inAlphabetOrder(users: [User]) -> (Dictionary<String, [User]>) {
-//       
-//    }
 }
