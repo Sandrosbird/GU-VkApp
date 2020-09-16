@@ -18,7 +18,7 @@ class MyFriendsTableViewController: UITableViewController {
     
     private let realmService = RealmService.shared
     private var realmToken: NotificationToken?
-    private var userIdForSegue: Int = 0
+    
     
     
     var friendsArray: Results<User>? {
@@ -64,13 +64,15 @@ class MyFriendsTableViewController: UITableViewController {
                 print(error)
             }
         }
-        
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "showUserPhotos" else { return }
+    private func ownerIdTransfer(friend: User) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let destinationViewController = storyboard.instantiateViewController(identifier: "FriendsPhotoCollectionViewController") as? FriendsPhotoCollectionViewController else { return }
         
-        MyFriendsTableViewController.goToPhotos(id: userIdForSegue)
+        destinationViewController.ownerId = friend.id
+        show(destinationViewController, sender: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,7 +110,6 @@ class MyFriendsTableViewController: UITableViewController {
         
         guard let friend = searchedFriends?[indexPath.row] else { return cell }
         let urlForAvatar = friend.photo
-        userIdForSegue = friend.id
         
         guard let url = URL(string: urlForAvatar ), let data = try? Data(contentsOf: url) else { return cell }
         
@@ -118,23 +119,23 @@ class MyFriendsTableViewController: UITableViewController {
         return cell
     }
     
+    // MARK: Метод для передачи id из нажатой ячейки
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard let friend = searchedFriends?[indexPath.row] else { return nil }
+        print(friend.id)
+        
+        ownerIdTransfer(friend: friend)
+        
+
+        return indexPath
+    }
+    
     @objc func refreshTable(_ sender: Any?) {
         loadFriends()
         print("refresh")
         refreshControl?.endRefreshing()
     }
-    
-    static func goToPhotos(id: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard let friendPhotoViewController = storyboard.instantiateViewController(identifier: "FriendsPhotoCollectionViewController") as? FriendsPhotoCollectionViewController else { return }
-        
-        friendPhotoViewController.ownerId = id
-        
-    }
-    
-    
-    
     
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct MainUserPhotosResponse: Decodable {
     let response: UserPhotosResponse
@@ -18,11 +19,16 @@ struct UserPhotosResponse: Decodable {
 }
 
 
-class UserPhotos: Decodable {
+class UserPhotos: Object, Decodable {
     
-    var photoId = 0
-    var ownerId = 0
-    var sizes: [String : String] = [:]
+    @objc dynamic var photoId = 0
+    @objc dynamic var ownerId = 0
+    //    @objc dynamic var sizes: [String : String] = [:]
+    let sizes = List<PhotoSizes>()
+    
+    override class func primaryKey() -> String? {
+        return "photoId"
+    }
     
     enum CodingKeys: String, CodingKey {
         case sizes
@@ -30,52 +36,52 @@ class UserPhotos: Decodable {
         case ownerId = "owner_id"
     }
     
-    enum PhotoSizes: String, CodingKey {
+    //    enum PhotoSizes: String, CodingKey {
+    //        case height, width, type, url
+    //    }
+    
+    
+    //    required convenience init(from decoder: Decoder) throws {
+    //        self.init()
+    //
+    //        let response = try decoder.container(keyedBy: CodingKeys.self)
+    //        self.photoId = try response.decode(Int.self, forKey: .photoId)
+    //        self.ownerId = try response.decode(Int.self, forKey: .ownerId)
+    //
+    //        var photoSizes = try response.nestedContainer(keyedBy: PhotoSizes.self, forKey: .sizes)
+    //        self.height = try photoSizes.decode(Int.self, forKey: .height)
+    //        self.width = try photoSizes.decode(Int.self, forKey: .width)
+    //        self.type = try photoSizes.decode(String.self, forKey: .type)
+    //
+    //        if self.type == "m" {
+    //            self.url = try photoSizes.decode(String.self, forKey: .url)
+    //        }
+    
+}
+
+
+class PhotoSizes: Object, Decodable {
+    @objc dynamic var height: Int = 0
+    @objc dynamic var width: Int = 0
+    @objc dynamic var type: String = ""
+    @objc dynamic var url: String = ""
+    
+    enum CodingKeys: String, CodingKey {
         case height, width, type, url
     }
     
+    override class func primaryKey() -> String? {
+        return "url"
+    }
     
     required convenience init(from decoder: Decoder) throws {
         self.init()
         
         let response = try decoder.container(keyedBy: CodingKeys.self)
-        self.photoId = try response.decode(Int.self, forKey: .photoId)
-        self.ownerId = try response.decode(Int.self, forKey: .ownerId)
-        
-        var photoSizes = try response.nestedUnkeyedContainer(forKey: .sizes)
-        
-        while !photoSizes.isAtEnd {
-            let photo = try photoSizes.nestedContainer(keyedBy: PhotoSizes.self)
-            let photoType = try photo.decode(String.self, forKey: .type)
-            let photoUrl = try photo.decode(String.self, forKey: .url)
-            
-            sizes[photoType] = photoUrl
-            
-        }
-        
-        
+        self.height = try response.decode(Int.self, forKey: .height)
+        self.width = try response.decode(Int.self, forKey: .width)
+        self.type = try response.decode(String.self, forKey: .type)
+        self.url = try response.decode(String.self, forKey: .url)
     }
- 
+    
 }
-
-//class PhotoSizes: Decodable {
-//    var height: Int = 0
-//    var width: Int = 0
-//    var type: String = ""
-//    var url: String = ""
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case height, width, type, url
-//    }
-//    
-//    required convenience init(from decoder: Decoder) throws {
-//        self.init()
-//        
-//        let response = try decoder.container(keyedBy: CodingKeys.self)
-//        self.height = try response.decode(Int.self, forKey: .height)
-//        self.width = try response.decode(Int.self, forKey: .width)
-//        self.type = try response.decode(String.self, forKey: .type)
-//        self.url = try response.decode(String.self, forKey: .url)
-//    }
-//    
-//}

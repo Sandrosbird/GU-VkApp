@@ -55,7 +55,7 @@ class NetworkService {
                 
 //                print(usersArray)
             } catch {
-                print(error)
+                print(error.localizedDescription)
             }
             completion(usersArray)
         }
@@ -85,13 +85,13 @@ class NetworkService {
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             
             do{
-                let jsonResponse = try JSONDecoder().decode(MainGroupsResponse.self, from: data!)
+                let jsonResponse = try JSONDecoder().decode(MainGroupsResponse.self, from: data!).response
                 
-                groupsArray = jsonResponse.response.items
+                groupsArray = jsonResponse.items
                 
 //                print(groupsArray)
             } catch {
-                print(error)
+                print(error.localizedDescription)
             }
             completion(groupsArray)
         }
@@ -117,17 +117,48 @@ class NetworkService {
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             
             do {
-                let jsonResponse = try JSONDecoder().decode(MainUserPhotosResponse.self, from: data!)
+                let jsonResponse = try JSONDecoder().decode(MainUserPhotosResponse.self, from: data!).response
                 
-                photos = jsonResponse.response.items
+                photos = jsonResponse.items
             } catch {
                 print(error.localizedDescription)
             }
             completion(photos)
-            
-
         }
+        
         task.resume()
+    }
+    
+    func usersNewsRequest() {
+        let session = NetworkService.shared.session
+        
+        var news = [News]()
+        var urlConstructor = URLComponents()
+        urlConstructor.scheme = schemeHttps
+        urlConstructor.host = hostVk
+        urlConstructor.path = "/method/newsfeed.get"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "access_token", value: Session.current.token),
+            URLQueryItem(name: "v", value: "5.124"),
+            URLQueryItem(name: "fields", value: "id"),
+            URLQueryItem(name: "fields", value: "first_name"),
+            URLQueryItem(name: "fields", value: "last_name"),
+            URLQueryItem(name: "fields", value: "name")
+        ]
+        
+        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
+            
+            do {
+                let jsonResponse = try JSONDecoder().decode(MainUserNewsResponse.self, from: data!).response
+                news = jsonResponse.items
+//                print(news)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
+        
+        
     }
     
     

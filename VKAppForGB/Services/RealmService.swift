@@ -54,6 +54,11 @@ class RealmService {
         }
     }
     
+    func refillRealmBase<T: Object>(object: T) throws {
+        try? deleteSingleObject(object: object)
+        try? addSingleObject(object: object)
+    }
+    
     
     
 }

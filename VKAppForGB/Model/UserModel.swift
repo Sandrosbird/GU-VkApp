@@ -24,7 +24,6 @@ class User: Object, Decodable {
     @objc dynamic var lastName = ""
     @objc dynamic var photo = ""
     
-    
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
@@ -36,7 +35,6 @@ class User: Object, Decodable {
     override static func primaryKey() -> String? {
         return "id"
     }
-    
     
     convenience required init (from decoder: Decoder) throws {
         self.init()
