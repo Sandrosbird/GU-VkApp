@@ -129,10 +129,11 @@ class NetworkService {
         task.resume()
     }
     
-    func usersNewsRequest() {
+    func usersNewsRequest(completion: @escaping (NewsResponse) -> Void) {
         let session = NetworkService.shared.session
-        
-        var news = [News]()
+
+        var newsResponse = NewsResponse()
+
         var urlConstructor = URLComponents()
         urlConstructor.scheme = schemeHttps
         urlConstructor.host = hostVk
@@ -143,22 +144,27 @@ class NetworkService {
             URLQueryItem(name: "fields", value: "id"),
             URLQueryItem(name: "fields", value: "first_name"),
             URLQueryItem(name: "fields", value: "last_name"),
-            URLQueryItem(name: "fields", value: "name")
+            URLQueryItem(name: "fields", value: "name"),
+            URLQueryItem(name: "count", value: "10"),
+            URLQueryItem(name: "filters", value: "post,photo")
+
         ]
-        
+
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
+
             do {
-                let jsonResponse = try JSONDecoder().decode(MainUserNewsResponse.self, from: data!).response
-                news = jsonResponse.items
-//                print(news)
+                let jsonResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response
+                newsResponse = jsonResponse!
+                print(newsResponse)
             } catch {
-                print(error.localizedDescription)
+                print(error)
             }
-            
+
+            completion(newsResponse)
+
         }
-        
-        
+        task.resume()
+
     }
     
     

@@ -106,7 +106,6 @@ class MyFriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
-       
         
         guard let friend = searchedFriends?[indexPath.row] else { return cell }
         let urlForAvatar = friend.photo
