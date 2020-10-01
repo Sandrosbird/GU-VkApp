@@ -27,44 +27,38 @@ class NetworkService {
     
     private init() {}
     
-
     // методы для работы с сетью
     func friendsRequest(completion: @escaping ([User])  -> Void ) {
-        
-        let session = NetworkService.shared.session
-        var usersArray = [User]()
-        
-        var urlConstructor = URLComponents()
-        urlConstructor.scheme = schemeHttps
-        urlConstructor.host = hostVk
-        urlConstructor.path = "/method/friends.get"
-        urlConstructor.queryItems = [
-            URLQueryItem(name: "user_id", value: "\(Session.current.userId)"),
-            URLQueryItem(name: "access_token", value: Session.current.token),
-            URLQueryItem(name: "v", value: "5.122"),
-            URLQueryItem(name: "count", value: "200"), //количество возвращаемых друзей
-            URLQueryItem(name: "fields", value: "photo_50")
-        ]
-        
-        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
+            let session = NetworkService.shared.session
+            var usersArray = [User]()
             
-            do{
-                let jsonResponse = try JSONDecoder().decode(MainResponse.self, from: data!)
+            var urlConstructor = URLComponents()
+            urlConstructor.scheme = self.schemeHttps
+            urlConstructor.host = self.hostVk
+            urlConstructor.path = "/method/friends.get"
+            urlConstructor.queryItems = [
+                URLQueryItem(name: "user_id", value: "\(Session.current.userId)"),
+                URLQueryItem(name: "access_token", value: Session.current.token),
+                URLQueryItem(name: "v", value: "5.122"),
+                URLQueryItem(name: "count", value: "200"), //количество возвращаемых друзей
+                URLQueryItem(name: "fields", value: "photo_50")
+            ]
+            
+            let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
                 
-                usersArray = jsonResponse.response.items
-                
-//                print(usersArray)
-            } catch {
-                print(error.localizedDescription)
+                do{
+                    let jsonResponse = try JSONDecoder().decode(MainResponse.self, from: data!)
+                    
+                    usersArray = jsonResponse.response.items
+                    
+                    //                print(usersArray)
+                } catch {
+                    print(error.localizedDescription)
+                }
+                completion(usersArray)
             }
-            completion(usersArray)
-        }
-        
-        task.resume()
-        
-    }
-
-    
+            task.resume()
+    }    
     
     func groupsRequest(completion: @escaping ([Group]) -> Void) {
         let session = NetworkService.shared.session
@@ -95,11 +89,11 @@ class NetworkService {
             }
             completion(groupsArray)
         }
-        
         task.resume()
     }
 
     func personsPhotoRequest(ownerId: Int, completion: @escaping ([UserPhotos]) -> Void) {
+        
         let session = NetworkService.shared.session
         
         var photos = [UserPhotos]()
@@ -125,14 +119,18 @@ class NetworkService {
             }
             completion(photos)
         }
-        
         task.resume()
     }
     
     func usersNewsRequest(completion: @escaping (NewsResponse) -> Void) {
         let session = NetworkService.shared.session
-
-        var newsResponse = NewsResponse()
+        
+        var news = NewsResponse()
+        var newsResponse = [News]()
+        var groupsResponse = [Groups]()
+        var profilesResponse = [Profiles]()
+        
+        let parseDispatchGroup = DispatchGroup()
 
         var urlConstructor = URLComponents()
         urlConstructor.scheme = schemeHttps
@@ -145,31 +143,43 @@ class NetworkService {
             URLQueryItem(name: "fields", value: "first_name"),
             URLQueryItem(name: "fields", value: "last_name"),
             URLQueryItem(name: "fields", value: "name"),
-            URLQueryItem(name: "count", value: "10"),
-            URLQueryItem(name: "filters", value: "post,photo")
+//            URLQueryItem(name: "count", value: "10"),
+            URLQueryItem(name: "filters", value: "post")
 
         ]
 
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-
-            do {
-                let jsonResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response
-                newsResponse = jsonResponse!
-                print(newsResponse)
-            } catch {
-                print(error)
+            
+            DispatchQueue.global().async(group: parseDispatchGroup) {
+                do {
+                    newsResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.items ?? [News]()
+                } catch {
+                    print(error)
+                }
             }
-
-            completion(newsResponse)
-
+            
+            DispatchQueue.global().async(group: parseDispatchGroup) {
+                do {
+                    groupsResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.groups ?? [Groups]()
+                } catch {
+                    print(error)
+                }
+            }
+            
+            DispatchQueue.global().async(group: parseDispatchGroup) {
+                do {
+                    profilesResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.profiles ?? [Profiles]()
+                } catch {
+                    print(error)
+                }
+            }
+            
+            parseDispatchGroup.notify(queue: DispatchQueue.main) {
+                news = NewsResponse(items: newsResponse, profiles: profilesResponse, groups: groupsResponse)
+                completion(news)
+            }
         }
         task.resume()
-
     }
-    
-    
-    
-    
-    
 }
 

@@ -18,7 +18,6 @@ struct UserPhotosResponse: Decodable {
     var items: [UserPhotos]
 }
 
-
 class UserPhotos: Object, Decodable {
     
     @objc dynamic var photoId = 0
@@ -35,28 +34,6 @@ class UserPhotos: Object, Decodable {
         case photoId = "id"
         case ownerId = "owner_id"
     }
-    
-    //    enum PhotoSizes: String, CodingKey {
-    //        case height, width, type, url
-    //    }
-    
-    
-    //    required convenience init(from decoder: Decoder) throws {
-    //        self.init()
-    //
-    //        let response = try decoder.container(keyedBy: CodingKeys.self)
-    //        self.photoId = try response.decode(Int.self, forKey: .photoId)
-    //        self.ownerId = try response.decode(Int.self, forKey: .ownerId)
-    //
-    //        var photoSizes = try response.nestedContainer(keyedBy: PhotoSizes.self, forKey: .sizes)
-    //        self.height = try photoSizes.decode(Int.self, forKey: .height)
-    //        self.width = try photoSizes.decode(Int.self, forKey: .width)
-    //        self.type = try photoSizes.decode(String.self, forKey: .type)
-    //
-    //        if self.type == "m" {
-    //            self.url = try photoSizes.decode(String.self, forKey: .url)
-    //        }
-    
 }
 
 
@@ -69,7 +46,7 @@ class PhotoSizes: Object, Decodable {
     enum CodingKeys: String, CodingKey {
         case height, width, type, url
     }
-    
+
     override class func primaryKey() -> String? {
         return "url"
     }

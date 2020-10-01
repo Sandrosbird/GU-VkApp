@@ -9,13 +9,9 @@
 import UIKit
 
 class Session {
-    
     static let current = Session()
-    
     private init() {}
-    
     var token = String()
     var userId = Int()
-    
     var userIdForPhotoSegue = Int()
 }

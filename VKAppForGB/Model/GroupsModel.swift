@@ -27,7 +27,6 @@ class Group: Object, Codable {
     @objc dynamic var name: String = ""
     @objc dynamic var photo: String = ""
     
-    
     enum CodingKeys: String, CodingKey {
         case id, name
         case photo = "photo_50"

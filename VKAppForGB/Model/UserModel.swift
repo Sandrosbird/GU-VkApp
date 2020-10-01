@@ -44,6 +44,5 @@ class User: Object, Decodable {
         self.firstName = try response.decode(String.self, forKey: .firstName)
         self.lastName = try response.decode(String.self, forKey: .lastName)
         self.photo = try response.decode(String.self, forKey: .photo)
-       
     }
 }

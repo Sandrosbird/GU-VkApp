@@ -12,10 +12,8 @@ class MyFriendsCell: UITableViewCell {
     @IBOutlet weak var friendIcon: UIImageView!
     @IBOutlet weak var friendName: UILabel!
     
-    
     override func layoutSubviews() {
         friendIcon.layer.cornerRadius = bounds.height/2
         clipsToBounds = true
     }
-    
 }

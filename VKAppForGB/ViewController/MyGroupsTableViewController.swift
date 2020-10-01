@@ -13,7 +13,6 @@ class MyGroupsTableViewController: UITableViewController {
     
     @IBOutlet var searchTextField: UISearchBar?
 
-    
     private let realmService = RealmService.shared
     private var realmToken: NotificationToken?
     
@@ -26,7 +25,6 @@ class MyGroupsTableViewController: UITableViewController {
     
     var searchedGroups: Results<Group>? {
         guard !searchText.isEmpty else { return groupsArray! }
-        
         return groupsArray?.filter(NSPredicate(format: "name CONTAINS[cd] %@", searchText))
     }
     
@@ -36,7 +34,6 @@ class MyGroupsTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 try? self?.realmService?.addManyObjects(objects: groups)
                 self?.tableView.reloadData()
-                
             }
         }
     }
@@ -46,27 +43,19 @@ class MyGroupsTableViewController: UITableViewController {
         realmToken = groupsArray?.observe { (changes: RealmCollectionChange) in
             switch changes {
             case .initial(_):
-                
                 self.tableView.reloadData()
-                
             case let .update(_, deletions: deletions, insertions: insertions, modifications: modifications):
-                
                 self.tableView.beginUpdates()
                 self.tableView.insertRows(at: insertions.map({IndexPath(row: $0, section: 0)}), with: .right)
                 self.tableView.deleteRows(at: deletions.map({IndexPath(row: $0, section: 0)}), with: .left)
                 self.tableView.reloadRows(at: modifications.map({IndexPath(row: $0, section: 0)}), with: .fade)
                 self.tableView.endUpdates()
-                
             case .error(let error):
-               
                 print(error)
             }
         }
-        
     }
 
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }

@@ -29,8 +29,6 @@ class AllGroupsTableViewController: UITableViewController {
         let group = groupsArray[indexPath.row]
 //        cell.groupImage.image = group.groupAvatar
 //        cell.groupName.text = group.name
-        
         return cell
     }
-    
 }

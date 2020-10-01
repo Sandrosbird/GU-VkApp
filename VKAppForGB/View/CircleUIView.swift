@@ -58,7 +58,7 @@ class CircleUIView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = 20
+        layer.cornerRadius = bounds.height/2
             //bounds.height / 2
     }
 }

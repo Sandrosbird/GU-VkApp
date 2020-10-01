@@ -19,7 +19,6 @@ struct News: Decodable {
     let reposts: Reposts?
     let views: Views?
     
-    
     enum CodingKeys: String, CodingKey {
         case text, date, attachments, comments, likes, reposts, views, type
         case sourceId = "source_id"
@@ -77,6 +76,5 @@ struct Link: Decodable {
         case url, title, description, target, text, photo
         case isFavorite = "is_favorite"
     }
-    
 }
 

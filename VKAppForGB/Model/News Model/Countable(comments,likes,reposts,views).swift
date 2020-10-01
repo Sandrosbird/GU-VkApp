@@ -29,7 +29,6 @@ struct Likes: Decodable {
         case canLike = "can_like"
         case canPublish = "can_publish"
     }
-    
 }
 
 struct Reposts: Decodable {
@@ -46,24 +45,3 @@ struct Reposts: Decodable {
 struct Views: Decodable {
     let count: Int?
 }
-
-//"comments": {
-//    "count": 0,
-//    "can_post": 0,
-//    "groups_can_post": true
-//},
-//"likes": {
-//    "count": 646,
-//    "user_likes": 0,
-//    "can_like": 1,
-//    "can_publish": 1
-//},
-//"reposts": {
-//    "count": 5,
-//    "wall_count": 0,
-//    "mail_count": 0,
-//    "user_reposted": 0
-//},
-//"views": {
-//    "count": 12949
-//},

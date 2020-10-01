@@ -18,11 +18,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         removeCookies()
         
         var urlComponents = URLComponents()
-        
         urlComponents.scheme = "https"
         urlComponents.host = "oauth.vk.com"
         urlComponents.path = "/authorize"
@@ -34,13 +32,9 @@ class LoginViewController: UIViewController {
             URLQueryItem(name: "scope", value: "270342"),
             URLQueryItem(name: "v", value: "5.92")
         ]
-        
         let request = URLRequest(url: urlComponents.url!)
-        
         loginWebView.load(request)
-        
     }
-    
 }
 
 extension LoginViewController: WKNavigationDelegate {

@@ -15,14 +15,15 @@ struct Profiles: Decodable {
     var deactivated: String? = ""
     var isClosed: Bool? = true
     var canAccessClosed: Bool? = true
-    
-    
+    var photo50: String? = ""
+
     enum CodingKeys: String, CodingKey {
         case id, deactivated
         case firstName = "first_name"
         case lastName = "last_name"
         case isClosed = "is_closed"
         case canAccessClosed = "can_access_closed"
+        case photo50 = "photo_50"
     }
 }
 
@@ -38,7 +39,6 @@ struct Groups: Decodable {
     var photo50: String? = ""
     var photo100: String? = ""
     var photo200: String? = ""
-    
     
     enum CodingKeys: String, CodingKey {
         case id, name, type

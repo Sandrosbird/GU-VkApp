@@ -17,5 +17,4 @@ class AllGroupsTableViewCell: UITableViewCell {
         groupImage.layer.cornerRadius = bounds.height/2
         clipsToBounds = true
     }
-    
 }

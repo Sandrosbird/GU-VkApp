@@ -23,8 +23,7 @@ class RealmService {
     
     private let realm: Realm
     
-    
-    // Methods for working with Realm DataBase
+    // MARK: Methods for working with Realm DataBase
     
     func addSingleObject<T: Object>(object: T) throws {
         try realm.write{
@@ -58,7 +57,4 @@ class RealmService {
         try? deleteSingleObject(object: object)
         try? addSingleObject(object: object)
     }
-    
-    
-    
 }

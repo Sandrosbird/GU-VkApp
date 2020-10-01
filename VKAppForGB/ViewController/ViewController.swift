@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 class ViewController: UIViewController {
-    
-    
+   
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var scrollBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -42,15 +41,10 @@ class ViewController: UIViewController {
             selector: #selector(keyboardWillBeHidden(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
     }
     
     
@@ -60,8 +54,6 @@ class ViewController: UIViewController {
         let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
         
         scrollBottomConstraint.constant = -frame.height
-        
-        
     }
     
     @objc func keyboardWillBeHidden(notification: Notification) {
@@ -85,7 +77,5 @@ class ViewController: UIViewController {
             return false
         }
     }
-    
-    
 }
 

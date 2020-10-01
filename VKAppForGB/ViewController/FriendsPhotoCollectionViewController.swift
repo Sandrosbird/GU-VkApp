@@ -24,7 +24,6 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
     var userPhotosArray: Results<UserPhotos>? = {
         let photo: Results<UserPhotos>? = RealmService.shared?.getFromRealm()
         return photo
-        
     }()
     
     // MARK: ViewController Life Cycle
@@ -39,7 +38,9 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         ownerId = 0
+        print("OwnerID is now = \(ownerId)")
     }
 
     // MARK: Methods by Dev
@@ -52,11 +53,8 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
             print("OwnerId: \(String(describing: self?.ownerId))")
             DispatchQueue.main.async {
                 try? self?.realmService?.addManyObjects(objects: photos)
-                
                 self?.collectionView.reloadData()
-                
                 completion?()
-                
             }
         }
     }
@@ -66,7 +64,6 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
         realmToken = userPhotosArray?.observe { (changes: RealmCollectionChange) in
             switch changes {
             case .initial(_):
-                
 //                do {
 //                    try? self.realmService?.deleteSingleObject(object: PhotoSizes.self)
 //                    try? self.realmService?.addManyObjects(objects: [UserPhotos.self])
@@ -75,22 +72,14 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
 //                }
                 self.collectionView.reloadData()
                 print("initial")
-
             case .update(_, _: _, _: _, _: _):
-                
-                
-
                 self.collectionView.reloadData()
                 print("update")
-
-
             case .error(let error):
-
                 print(error.localizedDescription)
             }
         }
     }
-
 
     // MARK: UICollectionViewDataSource
 
@@ -98,7 +87,6 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -115,14 +103,8 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
                 urlForPhoto = size.url
             }
         }
-
         guard let url = URL(string: urlForPhoto), let data = try? Data(contentsOf: url) else { return cell }
-        
         cell.friendsPhoto.image = UIImage(data: data)
-    
         return cell
     }
-
-    
-
 }
