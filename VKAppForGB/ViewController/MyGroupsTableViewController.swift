@@ -11,7 +11,7 @@ import RealmSwift
 
 class MyGroupsTableViewController: UITableViewController {
     
-    @IBOutlet var searchTextField: UISearchBar?
+    @IBOutlet private var searchTextField: UISearchBar?
 
     private let realmService = RealmService.shared
     private var realmToken: NotificationToken?

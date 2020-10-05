@@ -8,13 +8,14 @@
 
 import UIKit
 
+
 class NewsTableVIewController: UITableViewController {
     
-    var newsResponse = NewsResponse()
+    private var newsResponse = NewsResponse()
     var newsArray: [News]?
     var profilesArray: [Profiles]?
     var groupsArray: [Groups]?
-    var networkService = NetworkService.shared
+    private var networkService = NetworkService.shared
     let noPhotoUrl = "https://vk.com/images/camera_50.png"
 
     // MARK: TableVIewController LIfe Cycle
