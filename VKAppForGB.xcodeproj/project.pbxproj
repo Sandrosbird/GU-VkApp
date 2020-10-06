@@ -10,6 +10,9 @@
 		760D754025270FAA003872AE /* FriendsTableVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D753F25270FAA003872AE /* FriendsTableVIewController.swift */; };
 		760D7543252713CC003872AE /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D7542252713CC003872AE /* AsyncOperation.swift */; };
 		760D7547252B69C8003872AE /* FriendsRequestAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D7546252B69C8003872AE /* FriendsRequestAsyncOperation.swift */; };
+		760D7549252C5B61003872AE /* PhotoCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D7548252C5B61003872AE /* PhotoCacheService.swift */; };
+		760D754B252C70D3003872AE /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D754A252C70D3003872AE /* GroupsTableViewController.swift */; };
+		760D754D252C7455003872AE /* PhotoCacheServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D754C252C7455003872AE /* PhotoCacheServiceExtension.swift */; };
 		761ECDC92510AFB4007EBF0D /* NewsTableVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ECDC82510AFB4007EBF0D /* NewsTableVIewController.swift */; };
 		761ECDCB2510B612007EBF0D /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ECDCA2510B612007EBF0D /* NewsTableViewCell.swift */; };
 		762ACAEA24D18695001345C3 /* (OLD)UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762ACAE924D18695001345C3 /* (OLD)UserModel.swift */; };
@@ -50,6 +53,9 @@
 		760D753F25270FAA003872AE /* FriendsTableVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableVIewController.swift; sourceTree = "<group>"; };
 		760D7542252713CC003872AE /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		760D7546252B69C8003872AE /* FriendsRequestAsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRequestAsyncOperation.swift; sourceTree = "<group>"; };
+		760D7548252C5B61003872AE /* PhotoCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheService.swift; sourceTree = "<group>"; };
+		760D754A252C70D3003872AE /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
+		760D754C252C7455003872AE /* PhotoCacheServiceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheServiceExtension.swift; sourceTree = "<group>"; };
 		761ECDC82510AFB4007EBF0D /* NewsTableVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableVIewController.swift; sourceTree = "<group>"; };
 		761ECDCA2510B612007EBF0D /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		762ACAE924D18695001345C3 /* (OLD)UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "(OLD)UserModel.swift"; sourceTree = "<group>"; };
@@ -226,6 +232,7 @@
 				769FF9D724E07D220082B449 /* Session.swift */,
 				76B7349124E540F600F94585 /* NetworkService.swift */,
 				76D86A8024F7AB4B00FF2AC9 /* RealmService.swift */,
+				760D7548252C5B61003872AE /* PhotoCacheService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -235,6 +242,8 @@
 			children = (
 				76FC5446251E28BF007C5BC9 /* NewsTableVIewContorller.swift */,
 				760D753F25270FAA003872AE /* FriendsTableVIewController.swift */,
+				760D754A252C70D3003872AE /* GroupsTableViewController.swift */,
+				760D754C252C7455003872AE /* PhotoCacheServiceExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -364,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				762ACAEA24D18695001345C3 /* (OLD)UserModel.swift in Sources */,
+				760D754B252C70D3003872AE /* GroupsTableViewController.swift in Sources */,
 				76C434B62514BFC6002E5BA4 /* Main+NewsResponse.swift in Sources */,
 				762ACAF224D19B94001345C3 /* MyFriendsCell.swift in Sources */,
 				769FF9D424D6E4600082B449 /* CircleUIView.swift in Sources */,
@@ -372,11 +382,13 @@
 				762ACAF724D19DD2001345C3 /* MyGroupsCell.swift in Sources */,
 				76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */,
 				769FF9D824E07D220082B449 /* Session.swift in Sources */,
+				760D7549252C5B61003872AE /* PhotoCacheService.swift in Sources */,
 				760D7543252713CC003872AE /* AsyncOperation.swift in Sources */,
 				761ECDCB2510B612007EBF0D /* NewsTableViewCell.swift in Sources */,
 				761ECDC92510AFB4007EBF0D /* NewsTableVIewController.swift in Sources */,
 				762ACAEC24D186A5001345C3 /* (OLD)GroupsModel.swift in Sources */,
 				762ACAF024D19B85001345C3 /* MyFriendsTableViewController.swift in Sources */,
+				760D754D252C7455003872AE /* PhotoCacheServiceExtension.swift in Sources */,
 				760D7547252B69C8003872AE /* FriendsRequestAsyncOperation.swift in Sources */,
 				76A296CC24BA4A7C00A3182D /* ViewController.swift in Sources */,
 				769FF9CF24D379E70082B449 /* FriendsPhotoCollectionViewController.swift in Sources */,

@@ -18,8 +18,8 @@ class MyFriendsTableViewController: UITableViewController {
     let realmService = RealmService.shared
     var realmToken: NotificationToken?
     
-    let friendsRequestQueue = OperationQueue()
-    
+    lazy var photoCacheService = PhotoCacheService(container: self.tableView)
+        
     var friendsArray: Results<User>? {
         let friends: Results<User>? = realmService?.getFromRealm()
         return friends
@@ -31,11 +31,15 @@ class MyFriendsTableViewController: UITableViewController {
         return friendsArray?.filter(NSPredicate(format: "firstName CONTAINS[cd] %@ OR lastName CONTAINS[cd] %@", searchText, searchText))
     }
     
-    
-    private func loadFriends(completion: (() -> Void)? = nil) {
+    private func loadFriends() {
         guard friendsArray != nil else { return }
-        
-        NetworkService.shared.friendsRequest()
+        FriendsRequestAsyncOperation().friendsRequest() { [weak self] friends in
+            DispatchQueue.main.async {
+                try? self?.realmService?.addManyObjects(objects: friends)
+                self?.tableView.reloadData()
+            }
+            
+        }
     }
     
     private func createRealmNotification() {
@@ -68,9 +72,50 @@ class MyFriendsTableViewController: UITableViewController {
         
         
         if let friendsArray = friendsArray, friendsArray.isEmpty {
-                self.loadFriends()
-                self.createRealmNotification()
+            self.loadFriends()
+            self.createRealmNotification()
         }
+    }
+    
+    //MARK: DataSource
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return searchedFriends?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyFriendsCell", for: indexPath) as! MyFriendsCell
+        
+        guard let friend = searchedFriends?[indexPath.row] else { return cell }
+        let urlForAvatar = friend.photo
+        
+        //        guard let url = URL(string: urlForAvatar ), let data = try? Data(contentsOf: url) else { return cell }
+        
+        cell.friendName.text = "\(friend.firstName ) \(friend.lastName)"
+        cell.friendIcon.image = photoCacheService.photo(at: indexPath, url: urlForAvatar)
+        
+        return cell
+    }
+    
+    // MARK: Метод для передачи id из нажатой ячейки
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard let friend = searchedFriends?[indexPath.row] else { return nil }
+        print(friend.id)
+        ownerIdTransfer(friend: friend)
+        return indexPath
+    }
+    
+    private func ownerIdTransfer(friend: User) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let destinationViewController = storyboard.instantiateViewController(identifier: "FriendsPhotoCollectionViewController") as? FriendsPhotoCollectionViewController else { return }
+        
+        destinationViewController.ownerId = friend.id
+        show(destinationViewController, sender: nil)
     }
     
     @objc func refreshTable(_ sender: Any?) {

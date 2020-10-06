@@ -15,6 +15,7 @@ class MyGroupsTableViewController: UITableViewController {
 
     private let realmService = RealmService.shared
     private var realmToken: NotificationToken?
+    lazy var photoCacheService = PhotoCacheService(container: self.tableView)
     
     private var searchText: String { searchTextField?.text ?? "" }
     
@@ -69,28 +70,6 @@ class MyGroupsTableViewController: UITableViewController {
         if let groupsArray = groupsArray, groupsArray.isEmpty {
             loadGroups()
         }
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchedGroups?.count ?? 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupsCell", for: indexPath) as! MyGroupsTableViewCell
-        
-        let group = searchedGroups?[indexPath.row]
-        let groupAvatarURL = group?.photo
-        
-        guard let url = URL(string: groupAvatarURL ?? ""), let data = try? Data(contentsOf: url) else { return cell }
-        
-        cell.groupImage.image = UIImage(data: data)
-        cell.groupName.text = group?.name
-        
-        return cell
     }
     
     @objc func refreshTable(_ sender: Any?) {
