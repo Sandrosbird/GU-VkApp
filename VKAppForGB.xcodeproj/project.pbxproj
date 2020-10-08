@@ -32,6 +32,7 @@
 		76A296CF24BA4A7C00A3182D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A296CD24BA4A7C00A3182D /* Main.storyboard */; };
 		76A296D124BA4A8300A3182D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76A296D024BA4A8300A3182D /* Assets.xcassets */; };
 		76A296D424BA4A8300A3182D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A296D224BA4A8300A3182D /* LaunchScreen.storyboard */; };
+		76A8E5E8252F25FC00EC4633 /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A8E5E7252F25FC00EC4633 /* ScaledHeightImageView.swift */; };
 		76B7349224E540F600F94585 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7349124E540F600F94585 /* NetworkService.swift */; };
 		76B7349524E547DF00F94585 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76B7349424E547DF00F94585 /* WebKit.framework */; };
 		76B7349724E9D90F00F94585 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B7349624E9D90F00F94585 /* UserModel.swift */; };
@@ -77,6 +78,7 @@
 		76A296D024BA4A8300A3182D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76A296D324BA4A8300A3182D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76A296D524BA4A8300A3182D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76A8E5E7252F25FC00EC4633 /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
 		76B7349124E540F600F94585 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		76B7349424E547DF00F94585 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		76B7349624E9D90F00F94585 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				769FF9D324D6E4600082B449 /* CircleUIView.swift */,
+				76A8E5E7252F25FC00EC4633 /* ScaledHeightImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				762ACAEA24D18695001345C3 /* (OLD)UserModel.swift in Sources */,
 				760D754B252C70D3003872AE /* GroupsTableViewController.swift in Sources */,
 				76C434B62514BFC6002E5BA4 /* Main+NewsResponse.swift in Sources */,
+				76A8E5E8252F25FC00EC4633 /* ScaledHeightImageView.swift in Sources */,
 				762ACAF224D19B94001345C3 /* MyFriendsCell.swift in Sources */,
 				769FF9D424D6E4600082B449 /* CircleUIView.swift in Sources */,
 				76B7349224E540F600F94585 /* NetworkService.swift in Sources */,
