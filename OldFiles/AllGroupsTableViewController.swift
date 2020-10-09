@@ -26,7 +26,7 @@ class AllGroupsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsTableViewCell
-        let group = groupsArray[indexPath.row]
+//        let group = groupsArray[indexPath.row]
 //        cell.groupImage.image = group.groupAvatar
 //        cell.groupName.text = group.name
         return cell

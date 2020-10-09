@@ -25,7 +25,6 @@ class ViewController: UIViewController {
 //        }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -46,8 +45,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
-    
     
     @objc func keyboardWasShown(notification: Notification) {
         let userInfo = (notification as NSNotification).userInfo as! [String: Any]

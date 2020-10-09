@@ -71,6 +71,9 @@ class NetworkService {
 //    }
     
     func groupsRequest(completion: @escaping ([Group]) -> Void) {
+        
+        let parseDispatchGroup = DispatchGroup()
+        
         let session = NetworkService.shared.session
         
         var groupsArray = [Group]()
@@ -87,22 +90,25 @@ class NetworkService {
             URLQueryItem(name: "count", value: "150")
         ]
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            do{
-                let jsonResponse = try JSONDecoder().decode(MainGroupsResponse.self, from: data!).response
-                
-                groupsArray = jsonResponse.items
-                
-//                print(groupsArray)
-            } catch {
-                print(error.localizedDescription)
+            DispatchQueue.global().async(group: parseDispatchGroup) {
+                do{
+                    let jsonResponse = try JSONDecoder().decode(MainGroupsResponse.self, from: data!).response
+                    groupsArray = jsonResponse.items
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
-            completion(groupsArray)
+            
+            parseDispatchGroup.notify(queue: DispatchQueue.main) {
+                completion(groupsArray)
+            }
         }
         task.resume()
     }
 
     func personsPhotoRequest(ownerId: Int, completion: @escaping ([UserPhotos]) -> Void) {
+        
+        let parseDispatchGroup = DispatchGroup()
         
         let session = NetworkService.shared.session
         
@@ -119,15 +125,20 @@ class NetworkService {
             URLQueryItem(name: "owner_id", value: "\(ownerId)")
         ]
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            
-            do {
-                let jsonResponse = try JSONDecoder().decode(MainUserPhotosResponse.self, from: data!).response
-                
-                photos = jsonResponse.items
-            } catch {
-                print(error.localizedDescription)
+            DispatchQueue.global().async(group: parseDispatchGroup) {
+                do {
+                    let jsonResponse = try JSONDecoder().decode(MainUserPhotosResponse.self, from: data!).response
+                    
+                    photos = jsonResponse.items
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
-            completion(photos)
+            
+            parseDispatchGroup.notify(queue: DispatchQueue.main) {
+                completion(photos)
+            }
+            
         }
         task.resume()
     }

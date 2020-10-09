@@ -332,7 +332,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hTu-Fi-3vx">
-                                            <rect key="frame" x="71" y="11.333333333333336" width="41.666666666666657" height="21"/>
+                                            <rect key="frame" x="71" y="11.333333333333336" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -342,6 +342,7 @@
                                         <constraint firstItem="pyR-XZ-2pP" firstAttribute="leading" secondItem="4n5-zE-UqB" secondAttribute="leading" constant="16" id="24D-TF-Hxq"/>
                                         <constraint firstItem="hTu-Fi-3vx" firstAttribute="leading" secondItem="pyR-XZ-2pP" secondAttribute="trailing" constant="15" id="3Ah-1R-ITc"/>
                                         <constraint firstItem="hTu-Fi-3vx" firstAttribute="centerY" secondItem="4n5-zE-UqB" secondAttribute="centerY" id="MXQ-Pv-vi3"/>
+                                        <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="hTu-Fi-3vx" secondAttribute="trailing" constant="246" id="ZkK-j3-6wl"/>
                                         <constraint firstItem="pyR-XZ-2pP" firstAttribute="centerY" secondItem="4n5-zE-UqB" secondAttribute="centerY" id="qoN-4V-Ckj"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -424,7 +425,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDA-Im-T9c">
-                                            <rect key="frame" x="71" y="11.333333333333336" width="41.666666666666657" height="21"/>
+                                            <rect key="frame" x="71" y="11.333333333333336" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -432,6 +433,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="fDA-Im-T9c" firstAttribute="leading" secondItem="Jmh-u0-fGi" secondAttribute="trailing" constant="15" id="7tZ-Ov-B7G"/>
+                                        <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="fDA-Im-T9c" secondAttribute="trailing" constant="246" id="MJq-w6-c2k"/>
                                         <constraint firstItem="Jmh-u0-fGi" firstAttribute="centerY" secondItem="gUQ-vL-jek" secondAttribute="centerY" id="PmL-Xz-MPG"/>
                                         <constraint firstItem="Jmh-u0-fGi" firstAttribute="leading" secondItem="gUQ-vL-jek" secondAttribute="leading" constant="16" id="XlP-p4-mt7"/>
                                         <constraint firstItem="fDA-Im-T9c" firstAttribute="centerY" secondItem="gUQ-vL-jek" secondAttribute="centerY" id="ecN-Eb-7EW"/>
@@ -767,7 +769,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="E5s-wC-dZa"/>
+        <segue reference="26y-rj-CrW"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="commentSpeechBubble" width="512" height="512"/>

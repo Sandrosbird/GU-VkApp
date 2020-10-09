@@ -24,7 +24,7 @@ extension NewsTableVIewController {
         var newsOwnerGroup = Groups()
         var newsOwnerName = "NoName"
         var newsText = "NoText"
-                //        var newsPhotos: [Photo]
+        //        var newsPhotos: [Photo]
         
         var attachmentPhotoUrl: [String] = [""]
         var newsOwnerPhotoUrl: String = ""
@@ -32,7 +32,7 @@ extension NewsTableVIewController {
         guard let newsAttachments = news.attachments else { return cell }
         
         // MARK: Cell for ProfilePost
-
+        
         if news.sourceId ?? 0 > 0 {
             for profile in profilesArray ?? [Profiles]() {
                 if news.sourceId == profile.id {
@@ -44,7 +44,7 @@ extension NewsTableVIewController {
             newsOwnerPhotoUrl = newsOwnerUser.photo50 ?? noPhotoUrl
             
             
-
+            
             guard let newsImageUrl = URL(string:  attachmentPhotoUrl[0]), let newsImageData = try? Data(contentsOf: newsImageUrl) else { return cell }
             
             cell.newsImage?.image = UIImage(data: newsImageData)
@@ -81,7 +81,7 @@ extension NewsTableVIewController {
         cell.newsOwnerName.text = newsOwnerName
         
         cell.newsText?.text = newsText
-//        cell.newsImage?.image = UIImage(data: newsImageData)
+        //        cell.newsImage?.image = UIImage(data: newsImageData)
         
         cell.newsLikesLabel.text = String(news.likes?.count ?? 0101)
         cell.newsRepostLabel.text = String(news.reposts?.count ?? 0101)

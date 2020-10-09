@@ -1,5 +1,5 @@
 //
-//  GroupsTableViewController.swift
+//  MyGroupsTableViewController.swift
 //  VKAppForGB
 //
 //  Created by Emil Mescheryakov on 06.10.2020.

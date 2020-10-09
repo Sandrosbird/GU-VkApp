@@ -11,11 +11,11 @@ import UIKit
 
 class NewsTableVIewController: UITableViewController {
     
-    private var newsResponse = NewsResponse()
+    var newsResponse = NewsResponse()
     var newsArray: [News]?
     var profilesArray: [Profiles]?
     var groupsArray: [Groups]?
-    private var networkService = NetworkService.shared
+    var networkService = NetworkService.shared
     let noPhotoUrl = "https://vk.com/images/camera_50.png"
 
     // MARK: TableVIewController LIfe Cycle
@@ -31,31 +31,6 @@ class NewsTableVIewController: UITableViewController {
             self?.profilesArray = self?.newsResponse.profiles
             self?.groupsArray = self?.newsResponse.groups
         }
-    }
-    
-    
-    
-    // MARK: Request methods
-    
-    func loadNews(completion: (() -> Void)? = nil) {
-        guard newsResponse != nil else { return }
-        
-        NetworkService.shared.usersNewsRequest() { [weak self] newsResponse in
-            DispatchQueue.main.async(qos: .userInitiated) {
-                self?.newsResponse = newsResponse
-                completion?()
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
-    // MARK: Refresh table
-    
-    @objc func refreshTable(_ sender: Any?) {
-        loadNews()
-        tableView.reloadData()
-        print("refresh")
-        refreshControl?.endRefreshing()
     }
 }
 

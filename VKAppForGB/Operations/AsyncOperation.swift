@@ -57,5 +57,4 @@ class AsyncOperation: Operation {
         super.cancel()
         state = .finished
     }
-
 }
