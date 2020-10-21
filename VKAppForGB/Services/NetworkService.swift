@@ -69,7 +69,7 @@ class NetworkService {
 //            }
 //            task.resume()
 //    }
-    
+    //MARK: Groups Request
     func groupsRequest(completion: @escaping ([Group]) -> Void) {
         
         let parseDispatchGroup = DispatchGroup()
@@ -90,7 +90,7 @@ class NetworkService {
             URLQueryItem(name: "count", value: "150")
         ]
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            DispatchQueue.global().async(group: parseDispatchGroup) {
+            DispatchQueue.global(qos: .userInitiated).async(group: parseDispatchGroup) {
                 do{
                     let jsonResponse = try JSONDecoder().decode(MainGroupsResponse.self, from: data!).response
                     groupsArray = jsonResponse.items
@@ -106,6 +106,7 @@ class NetworkService {
         task.resume()
     }
 
+    //MARK: PersonsPhoto Request
     func personsPhotoRequest(ownerId: Int, completion: @escaping ([UserPhotos]) -> Void) {
         
         let parseDispatchGroup = DispatchGroup()
@@ -125,7 +126,7 @@ class NetworkService {
             URLQueryItem(name: "owner_id", value: "\(ownerId)")
         ]
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
-            DispatchQueue.global().async(group: parseDispatchGroup) {
+            DispatchQueue.global(qos: .userInitiated).async(group: parseDispatchGroup) {
                 do {
                     let jsonResponse = try JSONDecoder().decode(MainUserPhotosResponse.self, from: data!).response
                     
@@ -143,13 +144,19 @@ class NetworkService {
         task.resume()
     }
     
-    func usersNewsRequest(completion: @escaping (NewsResponse) -> Void) {
+    //MARK: News Request
+    func usersNewsRequest(
+        from startTime: TimeInterval? = nil,
+        fromItem: String? = nil,
+        completion: @escaping (NewsResponse) -> Void)
+    {
         let session = NetworkService.shared.session
         
         var news = NewsResponse()
         var newsResponse = [News]()
         var groupsResponse = [Groups]()
         var profilesResponse = [Profiles]()
+        var nextFromResponse = ""
         
         let parseDispatchGroup = DispatchGroup()
 
@@ -164,14 +171,19 @@ class NetworkService {
             URLQueryItem(name: "fields", value: "first_name"),
             URLQueryItem(name: "fields", value: "last_name"),
             URLQueryItem(name: "fields", value: "name"),
-//            URLQueryItem(name: "count", value: "10"),
-            URLQueryItem(name: "filters", value: "post")
-
+            URLQueryItem(name: "count", value: "10"),
+            URLQueryItem(name: "filters", value: "post"),
+            URLQueryItem(name: "start_from", value: fromItem)
         ]
+        if let startTime = startTime {
+            urlConstructor.queryItems?.append(
+                URLQueryItem(name: "start_time", value: String(startTime))
+            )
+        }
 
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             
-            DispatchQueue.global().async(group: parseDispatchGroup) {
+            DispatchQueue.global(qos: .userInitiated).async(group: parseDispatchGroup) {
                 do {
                     newsResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.items ?? [News]()
                 } catch {
@@ -179,7 +191,7 @@ class NetworkService {
                 }
             }
             
-            DispatchQueue.global().async(group: parseDispatchGroup) {
+            DispatchQueue.global(qos: .userInitiated).async(group: parseDispatchGroup) {
                 do {
                     groupsResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.groups ?? [Groups]()
                 } catch {
@@ -187,7 +199,7 @@ class NetworkService {
                 }
             }
             
-            DispatchQueue.global().async(group: parseDispatchGroup) {
+            DispatchQueue.global(qos: .userInitiated).async(group: parseDispatchGroup) {
                 do {
                     profilesResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.profiles ?? [Profiles]()
                 } catch {
@@ -195,8 +207,16 @@ class NetworkService {
                 }
             }
             
+            DispatchQueue.global(qos: .userInitiated).async(group: parseDispatchGroup) {
+                do {
+                    nextFromResponse = try JSONDecoder().decode(MainNewsResponse.self, from: data!).response?.nextFrom ?? ""
+                } catch {
+                    print(error)
+                }
+            }
+            
             parseDispatchGroup.notify(queue: DispatchQueue.main) {
-                news = NewsResponse(items: newsResponse, profiles: profilesResponse, groups: groupsResponse)
+                news = NewsResponse(items: newsResponse, profiles: profilesResponse, groups: groupsResponse, nextFrom: nextFromResponse)
                 completion(news)
             }
         }

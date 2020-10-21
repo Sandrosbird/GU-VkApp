@@ -12,11 +12,17 @@ extension NewsTableVIewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        newsArray?.count ?? 0
+        if (newsArray?.isEmpty ?? true) {
+            tableView.showEmptyMessage(message: "Нет новостей")
+        } else {
+            tableView.hideEmptyMessage()
+        }
+        return newsArray?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTableVIewCell") as! NewsTableVIewCell
+        cell.delegate = self
         
         guard let news = newsArray?[indexPath.row] else { return cell }
         
@@ -42,9 +48,7 @@ extension NewsTableVIewController {
             
             newsOwnerName = newsOwnerUser.firstName! + " " + newsOwnerUser.lastName!
             newsOwnerPhotoUrl = newsOwnerUser.photo50 ?? noPhotoUrl
-            
-            
-            
+        
             guard let newsImageUrl = URL(string:  attachmentPhotoUrl[0]), let newsImageData = try? Data(contentsOf: newsImageUrl) else { return cell }
             
             cell.newsImage?.image = UIImage(data: newsImageData)
@@ -61,14 +65,12 @@ extension NewsTableVIewController {
             }
         }
         
-        
         guard let attachmentsSizes = newsAttachments[0].photo?.sizes else { return cell }
         for size in attachmentsSizes {
             if size.type == "x" {
                 attachmentPhotoUrl.append(size.url ?? noPhotoUrl)
             }
         }
-        
         
         guard let newsImageUrl = URL(string:  attachmentPhotoUrl[1]), let newsImageData = try? Data(contentsOf: newsImageUrl) else { return cell }
         
@@ -89,5 +91,4 @@ extension NewsTableVIewController {
         cell.newsViewsLabel.text = String(news.views?.count ?? 0101)
         return cell
     }
-    
 }

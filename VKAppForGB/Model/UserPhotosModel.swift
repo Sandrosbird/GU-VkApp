@@ -23,7 +23,7 @@ class UserPhotos: Object, Decodable {
     @objc dynamic var photoId = 0
     @objc dynamic var ownerId = 0
     //    @objc dynamic var sizes: [String : String] = [:]
-    let sizes = List<PhotoSizes>()
+    var sizes = List<PhotoSizes>()
     
     override class func primaryKey() -> String? {
         return "photoId"

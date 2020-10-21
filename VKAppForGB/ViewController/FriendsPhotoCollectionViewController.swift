@@ -12,87 +12,56 @@ import RealmSwift
 //private let reuseIdentifier = "friendsPhotoCell"
 
 class FriendsPhotoCollectionViewController: UICollectionViewController {
-
-//    let friendsArray = NetworkService.shared.friendsRequest {
-//        completion()
-//    }
+    
     // MARK: Properties
     private let realmService = RealmService.shared
-    private var realmToken: NotificationToken?
+    lazy var photoCacheService = PhotoCacheService(container: self.collectionView)
     
     var ownerId: Int = 0
-    var userPhotosArray: Results<UserPhotos>? = {
-        let photo: Results<UserPhotos>? = RealmService.shared?.getFromRealm()
-        return photo
-    }()
+    var userPhotosArray: [UserPhotos]? {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     // MARK: ViewController Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createRealmNotification()
         
-        if let userPhotosArray = userPhotosArray, userPhotosArray.isEmpty {
-            loadPhoto()
-        }
+        loadPhoto()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        ownerId = 0
-        print("OwnerID is now = \(ownerId)")
-    }
-
     // MARK: Methods by Dev
     
     private func loadPhoto(completion: (() -> Void)? = nil) {
         
-        guard userPhotosArray != nil else { return }
-        
+//        guard userPhotosArray != nil else { return }
+       
         NetworkService.shared.personsPhotoRequest(ownerId: ownerId) { [weak self] photos in
             print("OwnerId: \(String(describing: self?.ownerId))")
             DispatchQueue.main.async {
-                try? self?.realmService?.addManyObjects(objects: photos)
-                self?.collectionView.reloadData()
+                self?.userPhotosArray = photos
                 completion?()
+                self?.collectionView.reloadData()
             }
         }
     }
     
-    private func createRealmNotification() {
-
-        realmToken = userPhotosArray?.observe { (changes: RealmCollectionChange) in
-            switch changes {
-            case .initial(_):
-//                do {
-//                    try? self.realmService?.deleteSingleObject(object: PhotoSizes.self)
-//                    try? self.realmService?.addManyObjects(objects: [UserPhotos.self])
-//                } catch {
-//                    print(error.localizedDescription)
-//                }
-                self.collectionView.reloadData()
-                print("initial")
-            case .update(_, _: _, _: _, _: _):
-                self.collectionView.reloadData()
-                print("update")
-            case .error(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return userPhotosArray?.count ?? 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendsPhotoCell", for: indexPath) as! FriendsPhotoCollectionViewCell
         guard let userPhotoSizes = userPhotosArray?[indexPath.item].sizes else { return cell }

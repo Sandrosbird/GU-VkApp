@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7607A7152539B3AF00DA2309 /* UITableViewExtension+EmptyMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A7142539B3AF00DA2309 /* UITableViewExtension+EmptyMessage.swift */; };
+		7607A719253DA7D600DA2309 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7607A718253DA7D600DA2309 /* AsyncImageView.swift */; };
 		760D754025270FAA003872AE /* MyFriendsTableVIewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D753F25270FAA003872AE /* MyFriendsTableVIewController+DataSource.swift */; };
 		760D7543252713CC003872AE /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D7542252713CC003872AE /* AsyncOperation.swift */; };
 		760D7547252B69C8003872AE /* FriendsRequestAsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D7546252B69C8003872AE /* FriendsRequestAsyncOperation.swift */; };
@@ -57,6 +59,8 @@
 /* Begin PBXFileReference section */
 		01E7421EC2821AB05E51D25A /* Pods-VKAppForGB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKAppForGB.debug.xcconfig"; path = "Target Support Files/Pods-VKAppForGB/Pods-VKAppForGB.debug.xcconfig"; sourceTree = "<group>"; };
 		708753F0CDEAD0F0DC390DB7 /* Pods-VKAppForGB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKAppForGB.release.xcconfig"; path = "Target Support Files/Pods-VKAppForGB/Pods-VKAppForGB.release.xcconfig"; sourceTree = "<group>"; };
+		7607A7142539B3AF00DA2309 /* UITableViewExtension+EmptyMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewExtension+EmptyMessage.swift"; sourceTree = "<group>"; };
+		7607A718253DA7D600DA2309 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		760D753F25270FAA003872AE /* MyFriendsTableVIewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyFriendsTableVIewController+DataSource.swift"; sourceTree = "<group>"; };
 		760D7542252713CC003872AE /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		760D7546252B69C8003872AE /* FriendsRequestAsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsRequestAsyncOperation.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				769FF9D324D6E4600082B449 /* CircleUIView.swift */,
 				76A8E5E7252F25FC00EC4633 /* ScaledHeightImageView.swift */,
+				7607A718253DA7D600DA2309 /* AsyncImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				76A8E5F525309C2B00EC4633 /* NewsTableViewControllerExtensions */,
 				760D754C252C7455003872AE /* PhotoCacheServiceExtension.swift */,
 				76A8E5E9252F8B3400EC4633 /* LoginViewController+WKNavigationDelegate.swift */,
+				7607A7142539B3AF00DA2309 /* UITableViewExtension+EmptyMessage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				76A8E5F725309C6500EC4633 /* NewsTableVIewController+Helpers.swift in Sources */,
 				76C434B82514C0B3002E5BA4 /* Profiles+GroupsNewsResponse.swift in Sources */,
 				76BDF15824EE906D00FC6D53 /* UserPhotosModel.swift in Sources */,
+				7607A7152539B3AF00DA2309 /* UITableViewExtension+EmptyMessage.swift in Sources */,
 				76C434BA2514C3C9002E5BA4 /* News.swift in Sources */,
 				760D754025270FAA003872AE /* MyFriendsTableVIewController+DataSource.swift in Sources */,
 				76C434BC2514CA6A002E5BA4 /* Countable(comments,likes,reposts,views).swift in Sources */,
@@ -457,6 +464,7 @@
 				762ACAF924D19DF0001345C3 /* AllGroupsCell.swift in Sources */,
 				769FF9D124D37A1D0082B449 /* FriendsPhotoCollectionViewCell.swift in Sources */,
 				76BDF15624EE7A4300FC6D53 /* GroupsModel.swift in Sources */,
+				7607A719253DA7D600DA2309 /* AsyncImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

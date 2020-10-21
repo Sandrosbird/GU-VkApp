@@ -9,7 +9,8 @@
 import UIKit
 
 struct News: Decodable {
-    let sourceId, date, markedAsAds, postId: Int?
+    let sourceId, markedAsAds, postId: Int?
+    let date: Int?
     let canDoubtCategory, canSetCategory, isFavorite: Bool?
     let postType, text, type: String?
     let attachments: [Attachments]?
