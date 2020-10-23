@@ -15,7 +15,7 @@ class FriendsPhotoCollectionViewController: UICollectionViewController {
     
     // MARK: Properties
     private let realmService = RealmService.shared
-    lazy var photoCacheService = PhotoCacheService(container: self.collectionView)
+//    lazy var photoCacheService = PhotoCacheService(container: self.collectionView)
     
     var ownerId: Int = 0
     var userPhotosArray: [UserPhotos]? {
