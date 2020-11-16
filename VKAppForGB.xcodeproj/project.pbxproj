@@ -50,6 +50,9 @@
 		76C434B82514C0B3002E5BA4 /* Profiles+GroupsNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C434B72514C0B3002E5BA4 /* Profiles+GroupsNewsResponse.swift */; };
 		76C434BA2514C3C9002E5BA4 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C434B92514C3C9002E5BA4 /* News.swift */; };
 		76C434BC2514CA6A002E5BA4 /* Countable(comments,likes,reposts,views).swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C434BB2514CA6A002E5BA4 /* Countable(comments,likes,reposts,views).swift */; };
+		76D323B2255EB431007C4B82 /* FlyWeight(only for homework) in Resources */ = {isa = PBXBuildFile; fileRef = 76D323B1255EB431007C4B82 /* FlyWeight(only for homework) */; };
+		76D323B6255EB4D4007C4B82 /* AdaptedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D323B5255EB4D4007C4B82 /* AdaptedUser.swift */; };
+		76D323BA255EB718007C4B82 /* FriendAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D323B9255EB718007C4B82 /* FriendAdapter.swift */; };
 		76D86A8124F7AB4B00FF2AC9 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D86A8024F7AB4B00FF2AC9 /* RealmService.swift */; };
 		76E19EBD24E40D500068764F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E19EBC24E40D500068764F /* LoginViewController.swift */; };
 		76FC5447251E28BF007C5BC9 /* NewsTableVIewContorller+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FC5446251E28BF007C5BC9 /* NewsTableVIewContorller+DataSource.swift */; };
@@ -104,6 +107,9 @@
 		76C434B72514C0B3002E5BA4 /* Profiles+GroupsNewsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profiles+GroupsNewsResponse.swift"; sourceTree = "<group>"; };
 		76C434B92514C3C9002E5BA4 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		76C434BB2514CA6A002E5BA4 /* Countable(comments,likes,reposts,views).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Countable(comments,likes,reposts,views).swift"; sourceTree = "<group>"; };
+		76D323B1255EB431007C4B82 /* FlyWeight(only for homework) */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "FlyWeight(only for homework)"; sourceTree = "<group>"; };
+		76D323B5255EB4D4007C4B82 /* AdaptedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptedUser.swift; sourceTree = "<group>"; };
+		76D323B9255EB718007C4B82 /* FriendAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAdapter.swift; sourceTree = "<group>"; };
 		76D86A8024F7AB4B00FF2AC9 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		76E19EBC24E40D500068764F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		76FC5446251E28BF007C5BC9 /* NewsTableVIewContorller+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewsTableVIewContorller+DataSource.swift"; sourceTree = "<group>"; };
@@ -146,6 +152,7 @@
 		762ACAE824D18673001345C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				76D323B4255EB4A3007C4B82 /* AdapterModel */,
 				76C434B42514BF5E002E5BA4 /* News Model */,
 				76B7349624E9D90F00F94585 /* UserModel.swift */,
 				76BDF15524EE7A4300FC6D53 /* GroupsModel.swift */,
@@ -210,6 +217,8 @@
 		76A296C624BA4A7C00A3182D /* VKAppForGB */ = {
 			isa = PBXGroup;
 			children = (
+				76D323BC255EB722007C4B82 /* Adapter */,
+				76D323B1255EB431007C4B82 /* FlyWeight(only for homework) */,
 				762ACAE824D18673001345C3 /* Model */,
 				762ACAEE24D19B59001345C3 /* ViewController */,
 				762ACAF324D19D77001345C3 /* ViewCell */,
@@ -273,6 +282,22 @@
 				76C434BB2514CA6A002E5BA4 /* Countable(comments,likes,reposts,views).swift */,
 			);
 			path = "News Model";
+			sourceTree = "<group>";
+		};
+		76D323B4255EB4A3007C4B82 /* AdapterModel */ = {
+			isa = PBXGroup;
+			children = (
+				76D323B5255EB4D4007C4B82 /* AdaptedUser.swift */,
+			);
+			path = AdapterModel;
+			sourceTree = "<group>";
+		};
+		76D323BC255EB722007C4B82 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				76D323B9255EB718007C4B82 /* FriendAdapter.swift */,
+			);
+			path = Adapter;
 			sourceTree = "<group>";
 		};
 		76E19EB724E40B340068764F /* Services */ = {
@@ -368,6 +393,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D323B2255EB431007C4B82 /* FlyWeight(only for homework) in Resources */,
 				76A296D424BA4A8300A3182D /* LaunchScreen.storyboard in Resources */,
 				76A296D124BA4A8300A3182D /* Assets.xcassets in Resources */,
 				76A296CF24BA4A7C00A3182D /* Main.storyboard in Resources */,
@@ -443,6 +469,7 @@
 				762ACAEC24D186A5001345C3 /* (OLD)GroupsModel.swift in Sources */,
 				76A8E5F425309BF000EC4633 /* MyGroupsTableViewController+Delegate.swift in Sources */,
 				762ACAF024D19B85001345C3 /* MyFriendsTableViewController.swift in Sources */,
+				76D323B6255EB4D4007C4B82 /* AdaptedUser.swift in Sources */,
 				760D754D252C7455003872AE /* PhotoCacheServiceExtension.swift in Sources */,
 				760D7547252B69C8003872AE /* FriendsRequestAsyncOperation.swift in Sources */,
 				76A296CC24BA4A7C00A3182D /* ViewController.swift in Sources */,
@@ -457,6 +484,7 @@
 				760D754025270FAA003872AE /* MyFriendsTableVIewController+DataSource.swift in Sources */,
 				76C434BC2514CA6A002E5BA4 /* Countable(comments,likes,reposts,views).swift in Sources */,
 				76A8E5EC2530967200EC4633 /* MyFriendsTableVIewController+Delegate.swift in Sources */,
+				76D323BA255EB718007C4B82 /* FriendAdapter.swift in Sources */,
 				76D86A8124F7AB4B00FF2AC9 /* RealmService.swift in Sources */,
 				76A8E5EA252F8B3400EC4633 /* LoginViewController+WKNavigationDelegate.swift in Sources */,
 				76A296C824BA4A7C00A3182D /* AppDelegate.swift in Sources */,
